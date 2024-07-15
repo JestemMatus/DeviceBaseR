@@ -93,7 +93,7 @@
             position: relative; /* For the label positioning */
         }
 
-        .box input[type="text"], .box input[type="password"], .box input[type="email"] {
+        .box input[type="text"], .box input[type="password"], .box input[type="email"], .box select {
             width: 100%;
             padding: 12px; /* Increased padding for better spacing */
             box-sizing: border-box;
@@ -105,13 +105,14 @@
             outline: none;
         }
 
-        .box input[type="text"]:focus, .box input[type="password"]:focus, .box input[type="email"]:focus {
+        .box input[type="text"]:focus, .box input[type="password"]:focus, .box input[type="email"]:focus, .box select:focus {
             outline: 2px solid mediumpurple; /* Added to remove default focus border */
         }
 
         .box input[type="text"]:not(:placeholder-shown),
         .box input[type="password"]:not(:placeholder-shown),
-        .box input[type="email"]:not(:placeholder-shown) {
+        .box input[type="email"]:not(:placeholder-shown),
+        .box select:not(:placeholder-shown) {
             background-color: #E8EFFD; /* Color when input has valid content */
         }
 
@@ -147,31 +148,31 @@
             top: 55%; /* Ensure both icons are vertically centered */
         }
 
-        .box input.error + .validation-icon {
+        .box input.error + .validation-icon, .box select.error + .validation-icon {
             display: inline-block;
             background-image: url('resources/error.png');
         }
 
-        .box input.valid + .validation-icon {
+        .box input.valid + .validation-icon, .box select.valid + .validation-icon {
             display: inline-block;
             background-image: url('resources/check.png');
         }
 
-        .box input.default-outline + .validation-icon {
+        .box input.default-outline + .validation-icon, .box select.default-outline + .validation-icon {
             display: none;
         }
 
-        .box input.error ~ .validation-icon-password {
+        .box input.error ~ .validation-icon-password, .box select.error ~ .validation-icon-password {
             display: inline-block;
             background-image: url('resources/error.png');
         }
 
-        .box input.valid ~ .validation-icon-password {
+        .box input.valid ~ .validation-icon-password, .box select.valid ~ .validation-icon-password {
             display: inline-block;
             background-image: url('resources/check.png');
         }
 
-        .box input.default-outline ~ .validation-icon-password {
+        .box input.default-outline ~ .validation-icon-password, .box select.default-outline ~ .validation-icon-password {
             display: none;
         }
 
@@ -267,30 +268,60 @@
             margin: 0;
             font-size: 12px;
             margin-top: 10px; /* Dodaj odstęp */
-
         }
 
         .box .validation-td.active {
             height: auto;
             padding: 2px 0; /* Adjust padding as necessary */
             margin-top: 10px; /* Dodaj odstęp */
-
         }
 
-        .box input.error {
+        .box input.error, .box select.error {
             outline: 2px solid red;
         }
 
-        .box input.valid {
+        .box input.valid, .box select.valid {
             outline: 2px solid green;
         }
 
-        .box input.default-outline {
+        .box input.default-outline, .box select.default-outline {
             outline: none;
         }
 
+        .tooltip {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            font-size: 12px;
+            z-index: 1000; /* Ensures the tooltip is above other elements */
+        }
 
+        .phone-wrapper {
+            display: flex;
+            gap: 5px;
+        }
 
+        .phone-wrapper .phone-prefix {
+            width: 80px; /* Zwiększ szerokość pola wyboru prefiksu */
+            appearance: none; /* Usunięcie domyślnej strzałki w przeglądarkach */
+            -webkit-appearance: none; /* Usunięcie domyślnej strzałki w Webkit przeglądarkach */
+            -moz-appearance: none; /* Usunięcie domyślnej strzałki w Firefox */
+            background: none; /* Usunięcie tła, aby strzałka była niewidoczna */
+        }
+
+        .box input.valid ~ .validation-icon-password, .box select.valid ~ .validation-icon {
+            display: inline-block;
+            background-image: url('resources/check.png');
+        }
+
+        .box input.error ~ .validation-icon-password, .box select.error ~ .validation-icon {
+            display: inline-block;
+            background-image: url('resources/error.png');
+        }
     </style>
     <script>
         function togglePasswordVisibility() {
@@ -304,50 +335,45 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateValidationClasses();
 
-            const inputs = document.querySelectorAll('.box input, .box textarea, .box select');
             const form = document.getElementById('registration-form');
+            const phonePrefix = document.getElementById('phonePrefix');
+            const phoneNumber = document.getElementById('phoneNumber');
+
+            phonePrefix.addEventListener('input', validatePhoneNumber);
+            phoneNumber.addEventListener('input', validatePhoneNumber);
 
             form.addEventListener('submit', function(event) {
-                updateValidationClasses();
+                const fullPhoneNumber = phonePrefix.value + ' ' + phoneNumber.value;
+
+                // Ustawienie pełnego numeru telefonu do ukrytego pola formularza
+                const hiddenPhoneNumberField = document.createElement('input');
+                hiddenPhoneNumberField.type = 'hidden';
+                hiddenPhoneNumberField.name = 'telephoneNumber';
+                hiddenPhoneNumberField.value = fullPhoneNumber;
+                form.appendChild(hiddenPhoneNumberField);
             });
 
-            inputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    resetOutline(input);
-                    const validationIcon = input.closest('.input-wrapper').querySelector('.validation-icon');
-                    const validationIconPassword = input.closest('.input-wrapper').querySelector('.validation-icon-password');
-                    if (validationIcon) validationIcon.style.display = 'none';
-                    if (validationIconPassword) validationIconPassword.style.display = 'none';
-                });
+            function validatePhoneNumber() {
+                const phoneRegex = /^[0-9]{3} [0-9]{3} [0-9]{3}$/;
+                const isValid = phoneRegex.test(phoneNumber.value);
 
-                input.addEventListener('focus', function() {
-                    resetOutline(input);
-                    const validationIcon = input.closest('.input-wrapper').querySelector('.validation-icon');
-                    const validationIconPassword = input.closest('.input-wrapper').querySelector('.validation-icon-password');
-                    if (validationIcon) validationIcon.style.display = 'none';
-                    if (validationIconPassword) validationIconPassword.style.display = 'none';
-                });
-
-                input.addEventListener('blur', function() {
-                    updateValidationClasses();
-                });
-            });
-
-            document.querySelector('.reload-image').addEventListener('click', function() {
-                window.location.href = '/register';
-            });
+                if (isValid) {
+                    phonePrefix.classList.add('valid');
+                    phonePrefix.classList.remove('error');
+                    phoneNumber.classList.add('valid');
+                    phoneNumber.classList.remove('error');
+                } else {
+                    phonePrefix.classList.add('error');
+                    phonePrefix.classList.remove('valid');
+                    phoneNumber.classList.add('error');
+                    phoneNumber.classList.remove('valid');
+                }
+            }
 
             // Skrypt do sprawdzania hasła
             const passwordInput = document.getElementById('password');
             const tooltip = document.createElement('div');
-            tooltip.style.position = 'absolute';
-            tooltip.style.backgroundColor = 'white';
-            tooltip.style.border = '1px solid #ccc';
-            tooltip.style.padding = '5px';
-            tooltip.style.borderRadius = '5px';
-            tooltip.style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.1)';
-            tooltip.style.display = 'none';
-            tooltip.style.fontSize = '12px';
+            tooltip.className = 'tooltip';
             document.body.appendChild(tooltip);
 
             passwordInput.addEventListener('input', function() {
@@ -364,14 +390,14 @@
                     { regex: /[!@#\$%\^&\*]/, message: 'Jeden znak specjalny (!@#$%^&*)' }
                 ];
 
-                let tooltipContent = 'Wymagania hasła:<br>';
+                let tooltipContent = '<b>Wymagania hasła:</b><br>';
                 let allValid = true;
 
-                requirements.forEach(req => {
+                requirements.forEach(function(req) {
                     if (req.regex.test(value)) {
-                        tooltipContent += `<span style="color: green;">✔️ ${req.message}</span><br>`;
+                        tooltipContent += '<span style="color: green;">✔️ ' + req.message + '</span><br>';
                     } else {
-                        tooltipContent += `<span style="color: red;">❌ ${req.message}</span><br>`;
+                        tooltipContent += '<span style="color: red;">❌ ' + req.message + '</span><br>';
                         allValid = false;
                     }
                 });
@@ -471,7 +497,8 @@
             if (validationIcon) validationIcon.style.display = 'none';
             if (validationIconPassword) validationIconPassword.style.display = 'none';
         }
-    </script></head>
+    </script>
+</head>
 <body>
 <div class="header">
     <div class="logo">
@@ -541,7 +568,13 @@
                     <td colspan="10">
                         <form:label path="department">Dział:</form:label>
                         <div class="input-wrapper">
-                            <form:input path="department" type="text" placeholder="Dział"/>
+                            <form:select path="department" class="box select">
+                                <form:option value="" label="Wybierz dział" />
+                                <form:option value="Dział 1" label="Dział 1" />
+                                <form:option value="Dział 2" label="Dział 2" />
+                                <form:option value="Dział 3" label="Dział 3" />
+                                <form:option value="Dział 4" label="Dział 4" />
+                            </form:select>
                             <span class="validation-icon"></span>
                         </div>
                     </td>
@@ -564,8 +597,12 @@
                 <tr>
                     <td colspan="10">
                         <form:label path="telephoneNumber">Numer telefonu:</form:label>
-                        <div class="input-wrapper">
-                            <form:input path="telephoneNumber" type="text" placeholder="Numer Telefonu"/>
+                        <div class="input-wrapper phone-wrapper">
+                            <select id="phonePrefix" class="box select phone-prefix">
+                                <option value="+48">+48</option>
+                                <option value="+42">+42</option>
+                            </select>
+                            <input id="phoneNumber" type="text" placeholder="123 123 123" class="phone-number"/>
                             <span class="validation-icon"></span>
                         </div>
                     </td>
@@ -586,6 +623,7 @@
                 <tr>
                     <td class="validation-td"><form:errors path="password"/></td>
                 </tr>
+
                 <tr>
                     <td colspan="10" id="submit-td">
                         <input type="submit" value="Zarejestruj się"/>
@@ -611,3 +649,4 @@
 </div>
 </body>
 </html>
+y
