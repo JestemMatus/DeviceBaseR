@@ -1,14 +1,17 @@
 package pl.dmcs.devicebase.service;
 
 import pl.dmcs.devicebase.domain.AppUser;
-import pl.dmcs.devicebase.repository.AppUserRepository;
-
 import java.util.List;
 
 public interface AppUserService {
-    public void addAppUser(AppUser user);
-    public void editAppUser(AppUser user);
-    public List<AppUser> listAppUser();
-    public void removeAppUser(long id);
-    public AppUser getAppUser(long id);
+    void addAppUser(AppUser appUser);
+    void editAppUser(AppUser appUser);
+    List<AppUser> listAppUser();
+    void removeAppUser(long id);
+    AppUser getAppUser(long id);
+
+    // New methods for uniqueness check
+    boolean isLoginUnique(String login);
+    boolean isEmailUnique(String email);
+    boolean isPhoneNumberUnique(String phoneNumber);
 }

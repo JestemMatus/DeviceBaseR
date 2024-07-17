@@ -20,12 +20,13 @@ import java.util.stream.Collectors;
 @Controller
 public class AppUserController {
 
-    private final AppUserValidator appUserValidator = new AppUserValidator();
+    private final AppUserValidator appUserValidator;
     private final AppUserService appUserService;
 
     @Autowired
-    public AppUserController(AppUserService appUserService) {
+    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator) {
         this.appUserService = appUserService;
+        this.appUserValidator = appUserValidator;
     }
 
     @RequestMapping(value = "/register")
@@ -43,12 +44,10 @@ public class AppUserController {
 
     @RequestMapping(value = "/addAppUser", method = RequestMethod.POST)
     public String addAppUser(@Valid @ModelAttribute("register") AppUser appUser, BindingResult result, Model model) {
-        System.out.println("Dodano usera " + appUser.getLogin());
 
         appUserValidator.validate(appUser, result);
 
         if (result.getErrorCount() == 0) {
-
             if (appUser.getId() == 0)
                 appUserService.addAppUser(appUser);
             return "redirect:/welcome?firstName=" + appUser.getFirstName();

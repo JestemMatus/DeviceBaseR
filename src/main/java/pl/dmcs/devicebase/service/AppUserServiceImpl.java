@@ -12,21 +12,57 @@ import java.util.List;
 public class AppUserServiceImpl implements AppUserService{
 
     private final AppUserRepository appUserRepository;
+
     @Autowired
-    public AppUserServiceImpl(AppUserRepository appUserRepository){this.appUserRepository = appUserRepository;}
+    public AppUserServiceImpl(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
+    }
 
     @Transactional
-    public void addAppUser(AppUser appUser){appUserRepository.save(appUser);}
+    @Override
+    public void addAppUser(AppUser appUser) {
+        appUserRepository.save(appUser);
+    }
 
     @Transactional
-    public void editAppUser(AppUser appUser){appUserRepository.save(appUser);}
+    @Override
+    public void editAppUser(AppUser appUser) {
+        appUserRepository.save(appUser);
+    }
 
     @Transactional
-    public List<AppUser> listAppUser(){return appUserRepository.findAll();}
+    @Override
+    public List<AppUser> listAppUser() {
+        return appUserRepository.findAll();
+    }
 
     @Transactional
-    public void removeAppUser(long id){appUserRepository.deleteById(id);}
+    @Override
+    public void removeAppUser(long id) {
+        appUserRepository.deleteById(id);
+    }
 
     @Transactional
-    public AppUser getAppUser(long id){ return appUserRepository.findById(id);}
+    @Override
+    public AppUser getAppUser(long id) {
+        return appUserRepository.findById(id); // No need for .orElse(null) since it's not an Optional
+    }
+
+    @Transactional
+    @Override
+    public boolean isLoginUnique(String login) {
+        return appUserRepository.findByLogin(login) == null;
+    }
+
+    @Transactional
+    @Override
+    public boolean isEmailUnique(String email) {
+        return appUserRepository.findByEmail(email) == null;
+    }
+
+    @Transactional
+    @Override
+    public boolean isPhoneNumberUnique(String phoneNumber) {
+        return appUserRepository.findByPhoneNumber(phoneNumber) == null;
+    }
 }

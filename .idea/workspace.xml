@@ -10,9 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f92e6d-acbc-46ac-9b47-f3d5c2486ffe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/test_user.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/validator/AppUserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/validator/AppUserValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_de.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_de.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_pl.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_pl.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +207,7 @@
       <workItem from="1720592204034" duration="15498000" />
       <workItem from="1720608205801" duration="30961000" />
       <workItem from="1720763814972" duration="14005000" />
-      <workItem from="1721042294317" duration="9208000" />
+      <workItem from="1721042294317" duration="37447000" />
     </task>
     <servers />
   </component>

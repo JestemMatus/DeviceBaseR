@@ -93,7 +93,7 @@
             position: relative; /* For the label positioning */
         }
 
-        .box input[type="text"], .box input[type="password"], .box input[type="email"], .box select {
+        .box input[type="text"], .box input[type="password"], .box input[type="email"] {
             width: 100%;
             padding: 12px; /* Increased padding for better spacing */
             box-sizing: border-box;
@@ -105,14 +105,13 @@
             outline: none;
         }
 
-        .box input[type="text"]:focus, .box input[type="password"]:focus, .box input[type="email"]:focus, .box select:focus {
+        .box input[type="text"]:focus, .box input[type="password"]:focus, .box input[type="email"]:focus {
             outline: 2px solid mediumpurple; /* Added to remove default focus border */
         }
 
         .box input[type="text"]:not(:placeholder-shown),
         .box input[type="password"]:not(:placeholder-shown),
-        .box input[type="email"]:not(:placeholder-shown),
-        .box select:not(:placeholder-shown) {
+        .box input[type="email"]:not(:placeholder-shown) {
             background-color: #E8EFFD; /* Color when input has valid content */
         }
 
@@ -148,31 +147,32 @@
             top: 55%; /* Ensure both icons are vertically centered */
         }
 
-        .box input.error + .validation-icon, .box select.error + .validation-icon {
+        .box input.error + .validation-icon {
             display: inline-block;
             background-image: url('resources/error.png');
         }
 
-        .box input.valid + .validation-icon, .box select.valid + .validation-icon {
+        .box input.valid + .validation-icon {
             display: inline-block;
             background-image: url('resources/check.png');
         }
 
-        .box input.default-outline + .validation-icon, .box select.default-outline + .validation-icon {
+        .box input.default-outline + .validation-icon {
             display: none;
+
         }
 
-        .box input.error ~ .validation-icon-password, .box select.error ~ .validation-icon-password {
+        .box input.error ~ .validation-icon-password {
             display: inline-block;
             background-image: url('resources/error.png');
         }
 
-        .box input.valid ~ .validation-icon-password, .box select.valid ~ .validation-icon-password {
+        .box input.valid ~ .validation-icon-password {
             display: inline-block;
             background-image: url('resources/check.png');
         }
 
-        .box input.default-outline ~ .validation-icon-password, .box select.default-outline ~ .validation-icon-password {
+        .box input.default-outline ~ .validation-icon-password {
             display: none;
         }
 
@@ -229,7 +229,7 @@
 
         .box label {
             display: block; /* Display label as block for better spacing */
-            font-size: 12px; /* Adjust font size */
+            font-size: 14px; /* Adjust font size */
             color: mediumpurple;
             font-weight: bold;
         }
@@ -239,6 +239,7 @@
             align-items: center;
             justify-content: center;
             margin: auto;
+
         }
 
         .box .reload-image {
@@ -264,27 +265,30 @@
             color: red;
             height: 0;
             overflow: hidden;
-            padding: 0;
-            margin: 0;
             font-size: 12px;
-            margin-top: 10px; /* Dodaj odstęp */
+            padding-top: 0;
+            margin-top: 0;
+
         }
 
         .box .validation-td.active {
             height: auto;
-            padding: 2px 0; /* Adjust padding as necessary */
+            padding-top: 10px;
             margin-top: 10px; /* Dodaj odstęp */
+            text-align: center;
+            font-size: 13px;
+            color: red;
         }
 
-        .box input.error, .box select.error {
+        .box input.error {
             outline: 2px solid red;
         }
 
-        .box input.valid, .box select.valid {
+        .box input.valid {
             outline: 2px solid green;
         }
 
-        .box input.default-outline, .box select.default-outline {
+        .box input.default-outline {
             outline: none;
         }
 
@@ -300,28 +304,53 @@
             z-index: 1000; /* Ensures the tooltip is above other elements */
         }
 
-        .phone-wrapper {
-            display: flex;
-            gap: 5px;
+        .box select {
+            width: 100%;
+            padding: 12px; /* Increased padding for better spacing */
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 5px; /* Added margin between label and input */
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            background-color: #f9f9f9; /* Default background color */
+            outline: none;
+            appearance: none; /* Removes default arrow in some browsers */
+            -webkit-appearance: none; /* Removes default arrow in Webkit browsers */
+            -moz-appearance: none; /* Removes default arrow in Firefox */
+            background-image: url('resources/down.png'); /* Custom arrow icon */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 25px;
         }
 
-        .phone-wrapper .phone-prefix {
-            width: 80px; /* Zwiększ szerokość pola wyboru prefiksu */
-            appearance: none; /* Usunięcie domyślnej strzałki w przeglądarkach */
-            -webkit-appearance: none; /* Usunięcie domyślnej strzałki w Webkit przeglądarkach */
-            -moz-appearance: none; /* Usunięcie domyślnej strzałki w Firefox */
-            background: none; /* Usunięcie tła, aby strzałka była niewidoczna */
+        .box select:focus {
+            outline: 2px solid mediumpurple; /* Added to remove default focus border */
         }
 
-        .box input.valid ~ .validation-icon-password, .box select.valid ~ .validation-icon {
-            display: inline-block;
-            background-image: url('resources/check.png');
+        .box select:not(:placeholder-shown) {
+            background-color: #E8EFFD; /* Color when input has valid content */
         }
 
-        .box input.error ~ .validation-icon-password, .box select.error ~ .validation-icon {
-            display: inline-block;
-            background-image: url('resources/error.png');
+        .box select.error {
+            outline: 2px solid red;
         }
+
+        .box select.valid {
+            outline: 2px solid green;
+        }
+
+        .box select.default-outline {
+            outline: none;
+        }
+
+        .box .input-phone input.error {
+            outline: 2px solid red;
+        }
+
+        .box .input-phone input.valid {
+            outline: 2px solid green;
+        }
+
     </style>
     <script>
         function togglePasswordVisibility() {
@@ -335,42 +364,61 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateValidationClasses();
 
+            const inputs = document.querySelectorAll('.box input, .box textarea, .box select, .box .input-phone input');
             const form = document.getElementById('registration-form');
-            const phonePrefix = document.getElementById('phonePrefix');
-            const phoneNumber = document.getElementById('phoneNumber');
-
-            phonePrefix.addEventListener('input', validatePhoneNumber);
-            phoneNumber.addEventListener('input', validatePhoneNumber);
+            const phoneNumberInput = document.querySelector('input[name="phoneNumber"]');
+            const phonePrefixInput = document.querySelector('select[name="phonePrefix"]');
 
             form.addEventListener('submit', function(event) {
-                const fullPhoneNumber = phonePrefix.value + ' ' + phoneNumber.value;
-
-                // Ustawienie pełnego numeru telefonu do ukrytego pola formularza
-                const hiddenPhoneNumberField = document.createElement('input');
-                hiddenPhoneNumberField.type = 'hidden';
-                hiddenPhoneNumberField.name = 'telephoneNumber';
-                hiddenPhoneNumberField.value = fullPhoneNumber;
-                form.appendChild(hiddenPhoneNumberField);
+                updateValidationClasses();
             });
 
-            function validatePhoneNumber() {
-                const phoneRegex = /^[0-9]{3} [0-9]{3} [0-9]{3}$/;
-                const isValid = phoneRegex.test(phoneNumber.value);
+            phoneNumberInput.addEventListener('input', function() {
+                let phoneNumber = phoneNumberInput.value.replace(/\D/g, ''); // Usuwamy wszystkie znaki nie będące cyframi
+                let formattedPhoneNumber = '';
 
-                if (isValid) {
-                    phonePrefix.classList.add('valid');
-                    phonePrefix.classList.remove('error');
-                    phoneNumber.classList.add('valid');
-                    phoneNumber.classList.remove('error');
-                } else {
-                    phonePrefix.classList.add('error');
-                    phonePrefix.classList.remove('valid');
-                    phoneNumber.classList.add('error');
-                    phoneNumber.classList.remove('valid');
+                // Formatowanie numeru: dodajemy spację po 3. i 6. cyfrze (jeśli jest to konieczne)
+                for (let i = 0; i < phoneNumber.length; i++) {
+                    if (i === 3 || i === 6) {
+                        formattedPhoneNumber += ' ';
+                    }
+                    formattedPhoneNumber += phoneNumber.charAt(i);
+
+                    // Zatrzymujemy dodawanie cyfr, jeśli osiągnęliśmy limit 9 cyfr
+                    if (formattedPhoneNumber.replace(/\D/g, '').length >= 9) {
+                        break;
+                    }
                 }
-            }
 
-            // Skrypt do sprawdzania hasła
+                phoneNumberInput.value = formattedPhoneNumber.trim(); // Ustawiamy sformatowany numer w polu input
+            });
+
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    resetOutline(input);
+                    const validationIcon = input.closest('.input-wrapper').querySelector('.validation-icon');
+                    const validationIconPassword = input.closest('.input-wrapper').querySelector('.validation-icon-password');
+                    if (validationIcon) validationIcon.style.display = 'none';
+                    if (validationIconPassword) validationIconPassword.style.display = 'none';
+                });
+
+                input.addEventListener('focus', function() {
+                    resetOutline(input);
+                    const validationIcon = input.closest('.input-wrapper').querySelector('.validation-icon');
+                    const validationIconPassword = input.closest('.input-wrapper').querySelector('.validation-icon-password');
+                    if (validationIcon) validationIcon.style.display = 'none';
+                    if (validationIconPassword) validationIconPassword.style.display = 'none';
+                });
+
+                input.addEventListener('blur', function() {
+                    updateValidationClasses();
+                });
+            });
+
+            document.querySelector('.reload-image').addEventListener('click', function() {
+                window.location.href = '/register';
+            });
+
             const passwordInput = document.getElementById('password');
             const tooltip = document.createElement('div');
             tooltip.className = 'tooltip';
@@ -420,69 +468,60 @@
         });
 
         function updateValidationClasses() {
+            const phonePrefixInput = document.querySelector('select[name="phonePrefix"]');
+            const phoneNumberInput = document.querySelector('input[name="phoneNumber"]');
             const validationFields = document.querySelectorAll('.validation-td');
+
             validationFields.forEach(field => {
                 const input = field.closest('tr').previousElementSibling.querySelector('input, textarea, select');
                 const validationIcon = input.closest('.input-wrapper').querySelector('.validation-icon');
                 const validationIconPassword = input.closest('.input-wrapper').querySelector('.validation-icon-password');
+
                 if (field.textContent.trim() !== '') {
-                    field.classList.add('active');
-                    if (input) {
+                    if (input.name === 'phonePrefix' || input.name === 'phoneNumber') {
+                        phonePrefixInput.classList.add('error');
+                        phonePrefixInput.classList.remove('valid');
+                        phoneNumberInput.classList.add('error');
+                        phoneNumberInput.classList.remove('valid');
+                    } else {
                         input.classList.add('error');
                         input.classList.remove('valid');
-                        if (validationIcon) {
-                            validationIcon.style.backgroundImage = 'url(resources/error.png)';
-                            validationIcon.style.display = 'inline-block';
-                        }
-                        if (validationIconPassword) {
-                            validationIconPassword.style.backgroundImage = 'url(resources/error.png)';
-                            validationIconPassword.style.display = 'inline-block';
-                        }
+                    }
+                    field.classList.add('active');
+                    if (validationIcon) {
+                        validationIcon.style.backgroundImage = 'url(resources/error.png)';
+                        validationIcon.style.display = 'inline-block';
+                    }
+                    if (validationIconPassword) {
+                        validationIconPassword.style.backgroundImage = 'url(resources/error.png)';
+                        validationIconPassword.style.display = 'inline-block';
                     }
                 } else {
-                    field.classList.remove('active');
-                    if (input && input.value.trim() !== '') {
-                        input.classList.remove('error');
-                        input.classList.add('valid');
-                        if (validationIcon) {
-                            validationIcon.style.backgroundImage = 'url(resources/check.png)';
-                            validationIcon.style.display = 'inline-block';
-                        }
-                        if (validationIconPassword) {
-                            validationIconPassword.style.backgroundImage = 'url(resources/check.png)';
-                            validationIconPassword.style.display = 'inline-block';
+                    if (input.name === 'phonePrefix' || input.name === 'phoneNumber') {
+                        if (phonePrefixInput.value.trim() !== '' && phoneNumberInput.value.trim() !== '') {
+                            phonePrefixInput.classList.remove('error');
+                            phonePrefixInput.classList.add('valid');
+                            phoneNumberInput.classList.remove('error');
+                            phoneNumberInput.classList.add('valid');
+                        } else {
+                            phonePrefixInput.classList.remove('error', 'valid');
+                            phonePrefixInput.classList.add('default-outline');
+                            phoneNumberInput.classList.remove('error', 'valid');
+                            phoneNumberInput.classList.add('default-outline');
                         }
                     } else {
                         input.classList.remove('error', 'valid');
                         input.classList.add('default-outline');
-                        if (validationIcon) {
-                            validationIcon.style.backgroundImage = '';
-                            validationIcon.style.display = 'none';
-                        }
-                        if (validationIconPassword) {
-                            validationIconPassword.style.backgroundImage = '';
-                            validationIconPassword.style.display = 'none';
-                        }
                     }
-                }
-            });
-        }
-
-        function resetValidationErrors() {
-            const validationFields = document.querySelectorAll('.validation-td');
-            validationFields.forEach(field => {
-                field.classList.remove('active');
-                field.innerHTML = '';
-                const input = field.closest('tr').previousElementSibling.querySelector('input, textarea, select');
-                const validationIcon = input.closest('.input-wrapper').querySelector('.validation-icon');
-                const validationIconPassword = input.closest('.input-wrapper').querySelector('.validation-icon-password');
-                if (input) {
-                    input.classList.remove('error', 'valid');
-                    input.classList.add('default-outline');
-                    validationIcon.style.backgroundImage = '';
-                    validationIcon.style.display = 'none';
-                    validationIconPassword.style.backgroundImage = '';
-                    validationIconPassword.style.display = 'none';
+                    field.classList.remove('active');
+                    if (validationIcon) {
+                        validationIcon.style.backgroundImage = '';
+                        validationIcon.style.display = 'none';
+                    }
+                    if (validationIconPassword) {
+                        validationIconPassword.style.backgroundImage = '';
+                        validationIconPassword.style.display = 'none';
+                    }
                 }
             });
         }
@@ -497,6 +536,7 @@
             if (validationIcon) validationIcon.style.display = 'none';
             if (validationIconPassword) validationIconPassword.style.display = 'none';
         }
+
     </script>
 </head>
 <body>
@@ -575,7 +615,7 @@
                                 <form:option value="Dział 3" label="Dział 3" />
                                 <form:option value="Dział 4" label="Dział 4" />
                             </form:select>
-                            <span class="validation-icon"></span>
+                            <span class="validation-icon-password"></span>
                         </div>
                     </td>
                 </tr>
@@ -596,19 +636,26 @@
                 </tr>
                 <tr>
                     <td colspan="10">
-                        <form:label path="telephoneNumber">Numer telefonu:</form:label>
-                        <div class="input-wrapper phone-wrapper">
-                            <select id="phonePrefix" class="box select phone-prefix">
-                                <option value="+48">+48</option>
-                                <option value="+42">+42</option>
-                            </select>
-                            <input id="phoneNumber" type="text" placeholder="123 123 123" class="phone-number"/>
-                            <span class="validation-icon"></span>
+                        <form:label path="phonePrefix">Numer telefonu:</form:label>
+                        <div class="input-wrapper" style="display: flex; align-items: center;">
+                            <div style="flex: 1; margin-right: 1em;">
+                                <form:select path="phonePrefix" style="width: 100%;">
+                                    <form:option value="#" label=""/>
+                                    <form:option value="+48" label="+48"/>
+                                    <form:option value="+42" label="+42"/>
+                                </form:select>
+                                <span class="validation-icon"></span>
+                            </div>
+                            <div class="input-phone" style="flex: 4; position: relative;">
+                                <form:input path="phoneNumber" type="text" placeholder="Numer Telefonu (123 123 123)" style="width: 100%;"/>
+                                <span class="validation-icon-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></span>
+                            </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td class="validation-td"><form:errors path="telephoneNumber"/></td>
+                    <td class="validation-td"><form:errors path="phonePrefix"/><form:errors path="phoneNumber"/></td
+
                 </tr>
                 <tr>
                     <td colspan="10">
@@ -649,4 +696,3 @@
 </div>
 </body>
 </html>
-y
