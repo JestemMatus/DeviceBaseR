@@ -90,7 +90,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 10px 0; /* Uniform margin */
+            margin: 2px 0; /* Uniform margin */
             cursor: pointer;
             border-radius: 12px;
             transition: background 0.3s ease, transform 0.3s ease;
@@ -119,7 +119,7 @@
         <img src="resources/wod.png" alt="Logo">
     </div>
     <div class="links">
-        <a href="#">Zaloguj się</a>
+        <a href="login">Zaloguj się</a>
         <a href="register">Utwórz konto</a>
         <a href="#">Pomoc</a>
     </div>
@@ -127,7 +127,9 @@
 
 <div class="content">
     <div class="box">
-        <button>Zaloguj się</button>
+        <form action="login">
+            <button type="submit">Zaloguj się</button>
+        </form>
         <form action="register">
             <button type="submit">Utwórz konto</button>
         </form>

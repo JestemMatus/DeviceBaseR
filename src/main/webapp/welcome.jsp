@@ -115,7 +115,7 @@
         <img src="resources/wod.png" alt="Logo">
     </div>
     <div class="links">
-        <a href="#">Zaloguj się</a>
+        <a href="login">Zaloguj się</a>
         <a href="/">Strona główna</a>
         <a href="#">Pomoc</a>
     </div>

@@ -10,18 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f92e6d-acbc-46ac-9b47-f3d5c2486ffe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/test_user.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SecurityWebApplicationInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/SpringSecurityCustomPagesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/accessDenied.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/lock1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/mark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/reset-password.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/user1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SpringConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SpringConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SpringInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SpringInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/validator/AppUserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/validator/AppUserValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/hello.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/hello.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_de.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_de.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_pl.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_pl.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/welcome.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +43,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -60,31 +71,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.DeviceBase [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.DeviceBase [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.DeviceBase [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.DeviceBase [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.DeviceBase [test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 10.0.0-M9.executor&quot;: &quot;Run&quot;,
-    &quot;Tomcat Server.hello.jsp.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Matus/DeviceBaseProject/DeviceBase&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.DeviceBase [clean].executor": "Run",
+    "Maven.DeviceBase [deploy].executor": "Run",
+    "Maven.DeviceBase [install].executor": "Run",
+    "Maven.DeviceBase [package].executor": "Run",
+    "Maven.DeviceBase [test].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Tomcat Server.Tomcat 10.0.0-M9.executor": "Run",
+    "Tomcat Server.hello.jsp.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Matus/DeviceBaseProject/DeviceBase/src/main/webapp/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources" />
@@ -207,7 +218,8 @@
       <workItem from="1720592204034" duration="15498000" />
       <workItem from="1720608205801" duration="30961000" />
       <workItem from="1720763814972" duration="14005000" />
-      <workItem from="1721042294317" duration="37447000" />
+      <workItem from="1721042294317" duration="38319000" />
+      <workItem from="1721376520293" duration="19921000" />
     </task>
     <servers />
   </component>

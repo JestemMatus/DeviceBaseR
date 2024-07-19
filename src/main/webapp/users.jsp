@@ -255,9 +255,14 @@
                 });
             });
         });
+        function formSubmit(){
+            document.getElementById("logoutForm").submit();
+        }
     </script>
 </head>
 <body>
+
+
 <div class="header">
     <div class="logo">
         <img src="resources/wod.png" alt="Logo">
@@ -266,9 +271,12 @@
         <a href="#">Zaloguj się</a>
         <a href="/">Strona główna</a>
         <a href="#">Pomoc</a>
+        <form action="/logout" method="post" id="logoutForm">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <a href="javascript:formSubmit()">Wyloguj</a>
     </div>
 </div>
-
 <div class="content">
     <div class="box">
         <h1>Użytkownicy</h1>

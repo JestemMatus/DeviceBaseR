@@ -7,10 +7,11 @@
 <html>
 <head>
     <title>Rejestracja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: "Roboto", sans-serif;
             background-color: #F1F0FF;
             background-size: cover;
             background-repeat: no-repeat;
@@ -208,6 +209,7 @@
         }
 
         .box h1 {
+            font-family: 'Roboto', sans-serif; /* Apply new font */
             font-size: 36px;
             background: linear-gradient(135deg, #6e8efb, #8B008B); /* Gradient header with matching color */
             -webkit-background-clip: text;
@@ -217,6 +219,7 @@
         }
 
         .box h2 {
+            font-family: 'Roboto', sans-serif; /* Apply new font */
             font-size: 20px;
             background: linear-gradient(135deg, #6e8efb, #8B008B); /* Gradient header with matching color */
             -webkit-background-clip: text;
@@ -228,10 +231,19 @@
         }
 
         .box label {
-            display: block; /* Display label as block for better spacing */
-            font-size: 14px; /* Adjust font size */
-            color: mediumpurple;
-            font-weight: bold;
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-family: 'Roboto', sans-serif; /* Apply new font */
+            font-weight: 500; /* Slightly bolder weight for better readability */
+            text-transform: uppercase; /* Uppercase for a modern look */
+            letter-spacing: 0.5px; /* Slight spacing between letters */
+            color: #4A4A4A; /* A darker shade of grey for better contrast */
+            transition: color 0.3s ease; /* Smooth transition for color change */
+        }
+
+        .box label:hover {
+            color: #6e8efb; /* Change color on hover for interactivity */
         }
 
         .box #reload-td {
@@ -284,9 +296,6 @@
             outline: 2px solid red;
         }
 
-        .box input.valid {
-            outline: 2px solid green;
-        }
 
         .box input.default-outline {
             outline: none;
@@ -294,24 +303,30 @@
 
         .tooltip {
             position: absolute;
-            background-color: white;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff; /* Biały tekst */
             border: 1px solid #ccc;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            padding: 10px; /* Większe odstępy */
+            border-radius: 6px; /* Zaokrąglone rogi */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lekki cień */
+            z-index: 1000; /* Upewnij się, że tooltip jest na wierzchu */
             display: none;
-            font-size: 12px;
-            z-index: 1000; /* Ensures the tooltip is above other elements */
+            font-size: 14px; /* Większy rozmiar czcionki */
+            transform: translateY(10px); /* Początkowe przesunięcie dla animacji */
+            pointer-events: none; /* Wyłącz interakcje z tooltipem */
+            max-width: 300px; /* Maksymalna szerokość */
         }
+
 
         .box select {
             width: 100%;
+            box-shadow: none;
             padding: 12px; /* Increased padding for better spacing */
             box-sizing: border-box;
             border-radius: 5px;
             border: 1px solid #ccc;
             margin-top: 5px; /* Added margin between label and input */
-            transition: border-color 0.3s ease, background-color 0.3s ease;
+            transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
             background-color: #f9f9f9; /* Default background color */
             outline: none;
             appearance: none; /* Removes default arrow in some browsers */
@@ -321,10 +336,7 @@
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 25px;
-        }
-
-        .box select:focus {
-            outline: 2px solid mediumpurple; /* Added to remove default focus border */
+            color: black; /* Default color for placeholder */
         }
 
         .box select:not(:placeholder-shown) {
@@ -335,9 +347,6 @@
             outline: 2px solid red;
         }
 
-        .box select.valid {
-            outline: 2px solid green;
-        }
 
         .box select.default-outline {
             outline: none;
@@ -347,8 +356,22 @@
             outline: 2px solid red;
         }
 
-        .box .input-phone input.valid {
-            outline: 2px solid green;
+
+        .box select:focus {
+            outline: 2px solid mediumpurple; /* Added to remove default focus border */
+        }
+
+        .box select:not([value=""]) {
+            background-color: #f9f9f9; /* Color when input has valid content */
+        }
+
+        .box select option[value=""] {
+            color: black; /* Style for placeholder option */
+        }
+
+        .box .href_class{
+            padding: 0px;
+            margin: 0px;
         }
 
     </style>
@@ -465,6 +488,20 @@
             passwordInput.addEventListener('blur', function() {
                 tooltip.style.display = 'none';
             });
+
+            // Dodatkowe dla selectów
+            const selects = document.querySelectorAll('.box select');
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    if (select.value === "") {
+                        select.style.backgroundColor = '#f9f9f9';
+                        select.style.color = 'black';
+                    } else {
+                        select.style.backgroundColor = '#E8EFFD';
+                        select.style.color = 'black';
+                    }
+                });
+            });
         });
 
         function updateValidationClasses() {
@@ -537,6 +574,7 @@
             if (validationIconPassword) validationIconPassword.style.display = 'none';
         }
 
+
     </script>
 </head>
 <body>
@@ -545,7 +583,7 @@
         <img src="resources/wod.png" alt="Logo">
     </div>
     <div class="links">
-        <a href="#">Zaloguj się</a>
+        <a href="login">Zaloguj się</a>
         <a href="/">Strona główna</a>
         <a href="#">Pomoc</a>
     </div>
@@ -678,7 +716,7 @@
                 </tr>
                 <tr>
                     <td colspan="10">
-                        <h2><a href="#">Masz już konto? Kliknij aby się zalogować.</a></h2>
+                        <h2><a href="#" class="href_class">Masz już konto? Kliknij aby się zalogować.</a></h2>
                     </td>
                 </tr>
                 <tr>

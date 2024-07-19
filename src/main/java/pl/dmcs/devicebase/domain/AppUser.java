@@ -34,7 +34,7 @@ public class AppUser {
     private String department;
     private String workplace;
 
-    @Size(min=2, max=4, message = "{error.size.firstName}")
+    @Size(min=2, max=4, message = "{error.size.telephonePrefix}")
     @Column(name = "phonePrefix", nullable = true)
     private String phonePrefix;
 
