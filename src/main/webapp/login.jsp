@@ -12,7 +12,7 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-color: #F1F0FF;
+            background-image: url("/resources/back4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -22,7 +22,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -34,6 +34,23 @@
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
+
+        .header .links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            font-size: 14px;
+        }
+
+        .header .links a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
 
         .header .logo {
             display: flex;
@@ -53,19 +70,6 @@
             gap: 20px;
         }
 
-        .header .links a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .header .links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
 
         .content {
             flex: 1;
@@ -87,7 +91,7 @@
             font-family: 'Roboto', sans-serif; /* Apply new font */
 
             font-size: 36px;
-            background: linear-gradient(135deg, #6e8efb, #8B008B); /* Gradient header with matching color */
+            background: linear-gradient(135deg, #67105C, #220039); /* Gradient header with matching color */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -133,7 +137,7 @@
         }
 
         .box label:hover {
-            color: #6e8efb; /* Change color on hover for interactivity */
+            color: #67105C; /* Change color on hover for interactivity */
         }
 
 
@@ -151,11 +155,11 @@
         }
 
         .box input[type="text"]:focus, .box input[type="password"]:focus {
-            outline: 2px solid mediumpurple;
+            outline: 2px solid #67105C;
         }
 
         .box input[type="submit"] {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: linear-gradient(135deg, #67105C, #220039);
             border: none;
             color: white;
             padding: 15px;
@@ -177,7 +181,7 @@
 
         .footer {
             margin-top: 40px;
-            color: black;
+            color: white;
             text-align: center;
             padding: 1px 0;
             width: 100%;
@@ -189,7 +193,7 @@
             display: block;
             margin: 20px 0;
             font-size: 20px;
-            color: mediumpurple;
+            color: #67105C;
             text-decoration: none;
         }
 
@@ -234,7 +238,7 @@
 
         .box h2 {
             font-family: 'Roboto', sans-serif; /* Apply new font */
-            background: linear-gradient(135deg, #6e8efb, #8B008B); /* Gradient header with matching color */
+            background: linear-gradient(135deg, #67105C, #220039); /* Gradient header with matching color */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -300,7 +304,7 @@
 <body>
 <div class="header">
     <div class="logo">
-        <img src="resources/wod.png" alt="Logo">
+        <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
         <a href="register">Zarejestruj się</a>

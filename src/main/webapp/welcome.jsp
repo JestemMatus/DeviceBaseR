@@ -12,7 +12,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #F1F0FF;
+            background-image: url("/resources/back4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -22,7 +22,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -34,6 +34,23 @@
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
+
+        .header .links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            font-size: 14px;
+        }
+
+        .header .links a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
 
         .header .logo {
             display: flex;
@@ -53,20 +70,6 @@
             gap: 20px;
         }
 
-        .header .links a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .header .links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .content {
             flex: 1;
             display: flex;
@@ -84,7 +87,7 @@
         }
 
         .content .box h1, .content .box h2 {
-            color: #6e8efb; /* Jednolity kolor dla nagłówków */
+            color: #67105C; /* Jednolity kolor dla nagłówków */
         }
 
         .content .box h1 {
@@ -98,13 +101,12 @@
 
         .footer {
             margin-top: 40px;
-            color: black;
+            color: white;
             text-align: center;
             padding: 10px 0;
             width: 100%;
             max-height: 50px;
             font-size: 12px;
-            background-color: #f1f1f1;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
     </style>

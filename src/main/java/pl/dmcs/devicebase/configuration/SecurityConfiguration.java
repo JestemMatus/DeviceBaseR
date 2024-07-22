@@ -36,7 +36,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/users**").hasRole("ADMIN")
+                        .requestMatchers("/users**","/home**").hasRole("ADMIN")
                         .requestMatchers("/login**","/**", "/register**, /welcome**").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                         .usernameParameter("login")
                         .passwordParameter("password")
                         .failureUrl("/login?error")
-                        .defaultSuccessUrl("/users",true)
+                        .defaultSuccessUrl("/home",true)
                         .permitAll()
                 )
                 .logout(logout -> logout

@@ -10,7 +10,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #F1F0FF;
+            background-image: url("/resources/back4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -20,7 +20,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -30,7 +30,23 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Added border at the bottom */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header .links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            font-size: 14px;
+        }
+
+        .header .links a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .header .logo {
@@ -51,20 +67,6 @@
             gap: 20px;
         }
 
-        .header .links a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .header .links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced hover effect */
-        }
-
         .content {
             flex: 1;
             display: flex;
@@ -73,38 +75,48 @@
         }
 
         .box {
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
             text-align: center;
-            width: 320px; /* Slightly increased width */
+            width: 360px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-10px); /* Lift the box more on hover */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+            background-color: rgba(255, 255, 255, 1); /* Fully opaque on hover */
+        }
+
+        .box form {
+            margin: 10px 0; /* Consistent margin around form elements */
         }
 
         .box button {
-            background: linear-gradient(135deg, #6e8efb, #a777e3); /* Modern gradient */
+            background: linear-gradient(135deg, #67105C, #220039); /* Modern gradient */
             border: none;
             color: white;
-            padding: 15px 0; /* Uniform padding */
+            padding: 20px 0; /* Uniform padding */
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 2px 0; /* Uniform margin */
             cursor: pointer;
             border-radius: 12px;
             transition: background 0.3s ease, transform 0.3s ease;
             width: 100%; /* Full width */
-            max-width: 250px; /* Ensure same size */
+            max-width: 300px; /* Ensure same size */
         }
 
         .box button:hover {
             background: linear-gradient(135deg, #5b79e4, #9561d2); /* Darker gradient on hover */
-            transform: scale(1.05); /* Slightly larger on hover */
+            transform: scale(1.1); /* Slightly larger on hover */
         }
 
         .footer {
-            color: black;
+            color: white;
             text-align: center;
             padding: 1px 0;
             width: 100%; /* Full width */
@@ -116,7 +128,7 @@
 <body>
 <div class="header">
     <div class="logo">
-        <img src="resources/wod.png" alt="Logo">
+        <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
         <a href="login">Zaloguj się</a>

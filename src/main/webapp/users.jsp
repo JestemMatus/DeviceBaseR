@@ -10,7 +10,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #F1F0FF;
+            background-image: url("/resources/back4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -20,7 +20,8 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -28,7 +29,11 @@
             align-items: center;
             font-size: 18px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
+            position: fixed;
+            top: 0;
+            left: 50%; /* Center the header */
+            transform: translateX(-50%); /* Center the header */
+            z-index: 1000;
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
@@ -48,20 +53,22 @@
 
         .header .links {
             display: flex;
-            gap: 20px;
+            gap: 10px; /* Reduce gap between links */
         }
 
         .header .links a {
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
+            padding: 8px 12px; /* Reduce padding */
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            font-size: 14px;
         }
 
         .header .links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
@@ -82,12 +89,12 @@
             text-align: center;
             width: 90%;
             max-width: 1400px;
-            margin: 20px;
+            margin: 100px;
         }
 
         .box h1 {
             font-size: 36px;
-            color: #6e8efb;
+            color: #67105C;
             margin-bottom: 20px;
         }
 
@@ -109,7 +116,7 @@
         }
 
         .filter-box label {
-            color: #6e8efb;
+            color: #67105C;
             font-weight: bold;
         }
 
@@ -123,7 +130,7 @@
         }
 
         .filter-box button {
-            background-color: #6e8efb;
+            background-color: #67105C;
             color: white;
             border: none;
             cursor: pointer;
@@ -131,7 +138,7 @@
         }
 
         .filter-box button:hover {
-            background-color: #5b79e4;
+            background-color: #220039;
         }
 
         .filter-box .reload-image {
@@ -163,7 +170,7 @@
         }
 
         th {
-            background-color: #6e8efb;
+            background-color: #67105C;
             color: white;
             cursor: pointer;
             user-select: none;
@@ -179,24 +186,23 @@
 
         .actions a {
             margin: 0 5px;
-            color: #6e8efb;
+            color: #67105C;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .actions a:hover {
-            color: #5b79e4;
+            color: #220039;
         }
 
         .footer {
             margin-top: 40px;
-            color: black;
+            color: white;
             text-align: center;
             padding: 10px 0;
             width: 100%;
             max-height: 50px;
             font-size: 12px;
-            background-color: #f1f1f1;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -269,7 +275,7 @@
     </div>
     <div class="links">
         <a href="#">Zaloguj się</a>
-        <a href="/">Strona główna</a>
+        <a href="/home">Strona główna</a>
         <a href="#">Pomoc</a>
         <form action="/logout" method="post" id="logoutForm">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

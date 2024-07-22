@@ -12,7 +12,7 @@
         body {
             margin: 0;
             font-family: "Roboto", sans-serif;
-            background-color: #F1F0FF;
+            background-image: url("/resources/back4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -22,7 +22,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -32,8 +32,25 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Added border at the bottom */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
+
+        .header .links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            font-size: 14px;
+        }
+
+        .header .links a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
 
         .header .logo {
             display: flex;
@@ -51,20 +68,6 @@
         .header .links {
             display: flex;
             gap: 20px;
-        }
-
-        .header .links a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .header .links a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced hover effect */
         }
 
         .content {
@@ -107,7 +110,7 @@
         }
 
         .box input[type="text"]:focus, .box input[type="password"]:focus, .box input[type="email"]:focus {
-            outline: 2px solid mediumpurple; /* Added to remove default focus border */
+            outline: 2px solid #67105C; /* Added to remove default focus border */
         }
 
         .box input[type="text"]:not(:placeholder-shown),
@@ -178,7 +181,7 @@
         }
 
         .box input[type="submit"] {
-            background: linear-gradient(135deg, #6e8efb, #a777e3); /* Modern gradient */
+            background: linear-gradient(135deg, #67105C, #220039); /* Modern gradient */
             border: none;
             color: white;
             padding: 15px;
@@ -200,7 +203,7 @@
 
         .footer {
             margin-top: 40px;
-            color: black;
+            color: white;
             text-align: center;
             padding: 1px 0;
             width: 100%; /* Full width */
@@ -211,7 +214,7 @@
         .box h1 {
             font-family: 'Roboto', sans-serif; /* Apply new font */
             font-size: 36px;
-            background: linear-gradient(135deg, #6e8efb, #8B008B); /* Gradient header with matching color */
+            background: linear-gradient(135deg, #67105C, #8B008B); /* Gradient header with matching color */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -221,7 +224,7 @@
         .box h2 {
             font-family: 'Roboto', sans-serif; /* Apply new font */
             font-size: 20px;
-            background: linear-gradient(135deg, #6e8efb, #8B008B); /* Gradient header with matching color */
+            background: linear-gradient(135deg, #67105C, #8B008B); /* Gradient header with matching color */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -243,7 +246,7 @@
         }
 
         .box label:hover {
-            color: #6e8efb; /* Change color on hover for interactivity */
+            color: #67105C; /* Change color on hover for interactivity */
         }
 
         .box #reload-td {
@@ -358,7 +361,7 @@
 
 
         .box select:focus {
-            outline: 2px solid mediumpurple; /* Added to remove default focus border */
+            outline: 2px solid #67105C; /* Added to remove default focus border */
         }
 
         .box select:not([value=""]) {
@@ -580,7 +583,7 @@
 <body>
 <div class="header">
     <div class="logo">
-        <img src="resources/wod.png" alt="Logo">
+        <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
         <a href="login">Zaloguj się</a>

@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-color: #F1F0FF;
+            background-image: url("/resources/back4.jpg");
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,8 +44,8 @@
             padding: 10px 20px;
             font-size: 16px;
             color: white;
-            background-color: #6e8efb; /* Gradient starting color */
-            background-image: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradient */
+            background-color: #67105C; /* Gradient starting color */
+            background-image: linear-gradient(135deg, #67105C, #220039); /* Gradient */
             border: none;
             border-radius: 5px;
             text-decoration: none;
