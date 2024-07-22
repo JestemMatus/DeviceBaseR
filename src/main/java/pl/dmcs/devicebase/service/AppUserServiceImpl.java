@@ -1,10 +1,13 @@
 package pl.dmcs.devicebase.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.dmcs.devicebase.domain.AppUser;
+import pl.dmcs.devicebase.domain.AppUserRole;
 import pl.dmcs.devicebase.repository.AppUserRepository;
+import pl.dmcs.devicebase.repository.AppUserRoleRepository;
 
 import java.util.List;
 
@@ -12,21 +15,35 @@ import java.util.List;
 public class AppUserServiceImpl implements AppUserService{
 
     private final AppUserRepository appUserRepository;
+    private final AppUserRoleRepository appUserRoleRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AppUserServiceImpl(AppUserRepository appUserRepository) {
+    public AppUserServiceImpl(AppUserRepository appUserRepository, AppUserRoleRepository appUserRoleRepository, PasswordEncoder passwordEncoder) {
+
         this.appUserRepository = appUserRepository;
+        this.appUserRoleRepository = appUserRoleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
-    @Override
     public void addAppUser(AppUser appUser) {
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        appUser.setIsEnabled(false);
         appUserRepository.save(appUser);
+
+        AppUserRole userRole = appUserRoleRepository.findByRole("ROLE_USER");
+        if (userRole != null && !appUser.getAppUserRole().contains(userRole)) {
+            appUser.getAppUserRole().add(userRole);
+            appUserRepository.save(appUser);
+        }
     }
 
     @Transactional
     @Override
     public void editAppUser(AppUser appUser) {
+        appUser.getAppUserRole().add(appUserRoleRepository.findByRole("ROLE_USER"));
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUserRepository.save(appUser);
     }
 
@@ -65,4 +82,10 @@ public class AppUserServiceImpl implements AppUserService{
     public boolean isPhoneNumberUnique(String phoneNumber) {
         return appUserRepository.findByPhoneNumber(phoneNumber) == null;
     }
+
+    @Transactional
+    public AppUser findByLogin(String login) {
+        return appUserRepository.findByLogin(login);
+    }
+
 }

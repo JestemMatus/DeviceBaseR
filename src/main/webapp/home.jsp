@@ -92,7 +92,7 @@
             flex: 1;
             width: 100%;
             max-width: 860px; /* Adjust the max-width to center the content */
-            max-height: 380px;
+            max-height: 420px;
             align-items: center;
             padding: 24px;
             border-radius: 15px;
@@ -131,6 +131,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.3s ease, background 0.3s ease;
+            margin: 5px;
         }
 
         .box .btn:hover {
@@ -183,6 +184,8 @@
     <div class="box">
         <h2>Użytkownicy</h2>
         <button class="btn" onclick="window.location.href='/users'">Zarządzaj użytkownikami</button>
+        <button class="btn" onclick="window.location.href='/appUserRole'">Zarządzaj rolami</button>
+
     </div>
     <div class="box">
         <h2>Moje konto</h2>

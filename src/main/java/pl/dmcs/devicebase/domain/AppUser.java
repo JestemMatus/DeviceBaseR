@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="appuser")
 public class AppUser {
@@ -23,13 +26,18 @@ public class AppUser {
 
     private String email;
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
     @Size(min=2, max=30, message = "{error.size.firstName}")
     private String login;
 
+    @NotNull
     @Column(name = "password", nullable = false)
-    @Size(min=2, max=30, message = "{error.password}")
     private String password;
+
+    private boolean enabled;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<AppUserRole> appUserRole = new HashSet<>();
 
     private String department;
     private String workplace;
@@ -130,4 +138,21 @@ public class AppUser {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Set<AppUserRole> getAppUserRole() {
+        return appUserRole;
+    }
+
+    public void setAppUserRole(Set<AppUserRole> appUserRole) {
+        this.appUserRole = appUserRole;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setIsEnabled(boolean isActive) {
+        this.enabled = isActive;
+    }
+
 }

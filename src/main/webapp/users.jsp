@@ -158,42 +158,49 @@
             border-collapse: collapse;
             margin-top: 20px;
             font-size: 14px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.9); /* Jasne tło dla tabeli */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Lżejszy cień */
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         th, td {
-            padding: 10px;
+            padding: 15px; /* Zwiększenie paddingu dla lepszej czytelności */
             text-align: left;
         }
 
         th {
-            background-color: #67105C;
+            background-color: #67105C; /* Użycie ciemniejszego koloru tła dla nagłówków */
             color: white;
+            font-weight: 500;
             cursor: pointer;
             user-select: none;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+        td {
+            background: #ffffff; /* Jasne tło dla komórek */
+            color: #333; /* Ciemniejszy tekst dla lepszej czytelności */
         }
 
-        tr:hover {
-            background-color: #f1f1f1;
+        tr:nth-child(even) td {
+            background: #f0f0f0; /* Kontrastujące, ale jasne tło dla co drugiego wiersza */
+        }
+
+        tr:hover td {
+            background: #e0e0e0; /* Kolor tła wiersza po najechaniu */
         }
 
         .actions a {
             margin: 0 5px;
-            color: #67105C;
+            color: #5b79e4;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .actions a:hover {
-            color: #220039;
+            color: #9561d2;
         }
+
 
         .footer {
             margin-top: 40px;
@@ -207,23 +214,29 @@
         }
 
         .box #filter-table {
-            border-radius: 10px;
             padding: 15px;
             border: 0;
+            background-color: #f9f9f9;
+            box-shadow: none;
         }
 
         .box .filter-tr {
             margin: 5px;
             border: 0;
+            background-color: #f9f9f9;
+
         }
 
         .box .filter-tr:hover {
             background-color: #f9f9f9;
+
         }
 
         .box .filter-td {
             margin: 5px;
             border: 0;
+            background-color: #f9f9f9;
+
         }
     </style>
     <script>
