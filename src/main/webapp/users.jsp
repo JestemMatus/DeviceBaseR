@@ -3,13 +3,21 @@
 <%@ page import="java.util.Date" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="java.util.Map" %>
+
 <html>
 <head>
     <title>Użytkownicy</title>
+    <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-image: url("/resources/back4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
@@ -17,6 +25,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            padding: 20px;
+            color: #fff;
         }
 
         .header {
@@ -38,6 +48,23 @@
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
 
+        .header .links {
+            display: flex;
+            gap: 10px; /* Reduce gap between links */
+            align-items: center; /* Center items vertically */
+        }
+
+        .header .links a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px; /* Reduce padding */
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            font-size: 14px;
+        }
+
+
         .header .logo {
             display: flex;
             align-items: center;
@@ -49,21 +76,6 @@
             height: 40px;
             margin-right: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .header .links {
-            display: flex;
-            gap: 10px; /* Reduce gap between links */
-        }
-
-        .header .links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px; /* Reduce padding */
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
-            font-size: 14px;
         }
 
         .header .links a:hover {
@@ -130,15 +142,23 @@
         }
 
         .filter-box button {
-            background-color: #67105C;
+            margin-top: 30px;
+            margin-bottom: 0;
+            background: linear-gradient(135deg, #67105C, #220039);
             color: white;
-            border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            padding: 10px;
         }
 
         .filter-box button:hover {
-            background-color: #220039;
+            background: linear-gradient(135deg, #5b79e4, #9561d2);
+            transform: scale(1.05);
         }
 
         .filter-box .reload-image {
@@ -147,6 +167,8 @@
             cursor: pointer;
             transition: transform 0.3s ease;
             vertical-align: middle;
+            margin-top: 30px;
+            margin-bottom: 0;
         }
 
         .filter-box .reload-image:hover {
@@ -156,7 +178,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 14px;
             background: rgba(255, 255, 255, 0.9); /* Jasne tło dla tabeli */
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Lżejszy cień */
@@ -173,13 +195,23 @@
             background-color: #67105C; /* Użycie ciemniejszego koloru tła dla nagłówków */
             color: white;
             font-weight: 500;
-            cursor: pointer;
             user-select: none;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        th a{
+            cursor: pointer;
         }
 
         td {
             background: #ffffff; /* Jasne tło dla komórek */
             color: #333; /* Ciemniejszy tekst dla lepszej czytelności */
+            max-width: 100px; /* Maksymalna szerokość komórki */
+            overflow: hidden; /* Ukrywanie nadmiaru tekstu */
+            text-overflow: ellipsis; /* Trzy kropki na końcu */
+            white-space: nowrap; /* Nie zawijaj tekstu */
+            text-align: center;
         }
 
         tr:nth-child(even) td {
@@ -188,6 +220,21 @@
 
         tr:hover td {
             background: #e0e0e0; /* Kolor tła wiersza po najechaniu */
+        }
+
+        .actions {
+            min-width: 200px;
+            font-size: 14px;
+        }
+
+        .actions .action-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px; /* Dodatkowy odstęp między grupami */
+        }
+
+        .actions .action-group:last-child {
+            margin-bottom: 0; /* Usuń odstęp po ostatniej grupie */
         }
 
         .actions a {
@@ -202,6 +249,7 @@
         }
 
 
+
         .footer {
             margin-top: 40px;
             color: white;
@@ -210,7 +258,6 @@
             width: 100%;
             max-height: 50px;
             font-size: 12px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .box #filter-table {
@@ -238,59 +285,128 @@
             background-color: #f9f9f9;
 
         }
+
+        .box-fline {
+            background-color: #f9f9f9;
+            color: #67105C;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            margin-top: 0;
+            max-width: calc(1620px);
+            width: 100%;
+            flex: 1;
+            position: relative;
+            display: flex; /* Add this line */
+            align-items: center; /* Add this line */
+            justify-content: center; /* Optional: Add this line to center horizontally */
+        }
+
+        .box-fline h1 {
+            color: #67105C;
+            text-align: center;
+            margin: 0; /* Remove margin */
+        }
+
+        .back-div {
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 20px; /* Adjust the right position as needed */
+            transform: translateY(-50%); /* Center vertically */
+            background-color: whitesmoke;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            max-width: 180px;
+            width: 100%;
+        }
+
+        .icon-true {
+            color: green;
+        }
+
+        .icon-false {
+            color: red;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+
     </style>
+    <script src="<c:url value='/resources/js/ScrollToTop.js' />"></script>
     <script>
+        let sortDirection = {}; // To keep track of sorting direction for each column
+
+        function back() {
+            window.location.href = "/home";
+        }
+
         function resetFilters() {
             document.querySelectorAll('.filter-box input[type="text"]').forEach(input => input.value = '');
             document.querySelector('form').submit();
         }
 
-        function sortTable(table, column, order) {
-            const tbody = table.tBodies[0];
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-
-            const sortedRows = rows.sort((a, b) => {
-                const aText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim().toLowerCase();
-                const bText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim().toLowerCase();
-
-                return (aText > bText ? 1 : -1) * (order === 'asc' ? 1 : -1);
-            });
-
-            while (tbody.firstChild) {
-                tbody.removeChild(tbody.firstChild);
-            }
-
-            tbody.append(...sortedRows);
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            let sortOrder = 'asc';
-
-            document.querySelectorAll('th').forEach((header, index) => {
-                header.addEventListener('click', () => {
-                    const table = header.closest('table');
-                    sortTable(table, index, sortOrder);
-                    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-                });
-            });
+        // Skrypt do przywracania scrolla po odświeżeniu strony
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollPosition = localStorage.getItem("scrollPosition");
+            if (scrollPosition) {
+                window.scrollTo(0, scrollPosition);
+                localStorage.removeItem("scrollPosition");
+            }
         });
-        function formSubmit(){
-            document.getElementById("logoutForm").submit();
+
+        window.addEventListener("beforeunload", function(event) {
+            localStorage.setItem("scrollPosition", window.scrollY);
+        });
+
+        // Funkcja do sortowania tabeli
+        function sortTable(n, isNumeric = false) {
+            const table = document.getElementById("userTable");
+            const rows = Array.prototype.slice.call(table.rows, 1);
+            const currentDir = sortDirection[n] || "asc";
+            const newDir = currentDir === "asc" ? "desc" : "asc";
+
+            rows.sort((a, b) => {
+                const x = isNumeric ? parseFloat(a.cells[n].innerText) : a.cells[n].innerText.toLowerCase();
+                const y = isNumeric ? parseFloat(b.cells[n].innerText) : b.cells[n].innerText.toLowerCase();
+
+                if (newDir === "asc") {
+                    return x > y ? 1 : x < y ? -1 : 0;
+                } else {
+                    return x < y ? 1 : x > y ? -1 : 0;
+                }
+            });
+
+            rows.forEach(row => table.appendChild(row));
+            sortDirection[n] = newDir; // Save the new sorting direction
+        }
+
+        function confirmAction(actionUrl, message) {
+            if (confirm(message)) {
+                window.location.href = actionUrl;
+            }
         }
     </script>
 </head>
 <body>
 
-
 <div class="header">
     <div class="logo">
-        <img src="resources/wod.png" alt="Logo">
+        <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
         <a href="#">Zaloguj się</a>
         <a href="/home">Strona główna</a>
         <a href="#">Pomoc</a>
-        <form action="/logout" method="post" id="logoutForm">
+        <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <a href="javascript:formSubmit()">Wyloguj</a>
@@ -298,7 +414,12 @@
 </div>
 <div class="content">
     <div class="box">
-        <h1>Użytkownicy</h1>
+        <div class="box-fline">
+            <h1>Użytkownicy</h1>
+            <div class="back-div">
+                <button onclick="back()">Cofnij</button>
+            </div>
+        </div>
         <div class="filter-box">
             <form method="get" action="${pageContext.request.contextPath}/users" id="filterForm">
                 <table id="filter-table">
@@ -337,14 +458,15 @@
         <table id="userTable">
             <thead>
             <tr>
-                <th>Login</th>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Email</th>
-                <th>Numer telefonu</th>
-                <th>Dział</th>
-                <th>Stanowisko pracy</th>
-                <th>Actions</th>
+                <th><a href="javascript:sortTable(0)">Login</a></th>
+                <th><a href="javascript:sortTable(1)">Imię</a></th>
+                <th><a href="javascript:sortTable(2)">Nazwisko</a></th>
+                <th><a href="javascript:sortTable(3)">Email</a></th>
+                <th><a href="javascript:sortTable(4)">Numer telefonu</a></th>
+                <th><a href="javascript:sortTable(5)">Dział</a></th>
+                <th><a href="javascript:sortTable(6)">Stanowisko pracy</a></th>
+                <th><a href="javascript:sortTable(7)">Aktywny</a></th>
+                <th>Akcje</th>
             </tr>
             </thead>
             <tbody>
@@ -357,11 +479,27 @@
                     <td><c:out value="${user.telephoneNumber}" /></td>
                     <td><c:out value="${user.department}" /></td>
                     <td><c:out value="${user.workplace}" /></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.enabled}">
+                                <span class="icon-true">✔️</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="icon-false">❌</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td class="actions">
-                        <a href="<c:url value='/delete/${user.id}' />">Delete</a> |
-                        <a href="<c:url value='/edit/${user.id}' />">Edit</a> |
-                        <a href="<c:url value='/approve/${user.id}' />">Approve</a> |
-                        <a href="<c:url value='/assignRole/${user.id}' />">Assign Role</a>
+                        <div class="action-group">
+                            <a href="javascript:confirmAction('<c:url value='/delete/${user.id}' />', 'Czy na pewno chcesz usunąć tego użytkownika?')">Usuń</a> |
+                            <a href="<c:url value='/edit/${user.id}' />">Edytuj</a> |
+                            <a href="javascript:confirmAction('<c:url value='/approve/${user.id}' />', 'Czy na pewno chcesz aktywować tego użytkownika?')">Aktywuj</a>
+                        </div>
+                        <div class="action-group">
+                            <a href="javascript:confirmAction('<c:url value='/deactivate/${user.id}' />', 'Czy na pewno chcesz dezaktywować tego użytkownika?')">Dezaktywuj</a> |
+                            <a href="<c:url value='/assignRole/${user.id}' />">Role</a> |
+                            <a href="<c:url value='/assignRole/${user.id}' />">Więcej</a>
+                        </div>
                     </td>
                 </tr>
             </c:forEach>
@@ -369,7 +507,6 @@
         </table>
     </div>
 </div>
-
 <div class="footer">
     <p>&copy; <%= new SimpleDateFormat("EEEE, d MMMM yyyy", new Locale("pl", "PL")).format(new Date()) %> - Wszystkie prawa zastrzeżone</p>
 </div>

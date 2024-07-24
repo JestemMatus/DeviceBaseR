@@ -43,7 +43,7 @@ public class MyAppUserDetailsService implements UserDetailsService {
     private User buildUserForAuthentication(pl.dmcs.devicebase.domain.AppUser appUser, List<GrantedAuthority> authorities) {
         System.out.println("Building user for authentication: " + appUser.getLogin());
         System.out.println("User password (encoded): " + appUser.getPassword());
-        System.out.println("ppUser.isActive()"+ appUser.isEnabled());
+        System.out.println("AppUser.isActive()"+ appUser.isEnabled());
         System.out.println(authorities);
         return new User(appUser.getLogin(), appUser.getPassword(), appUser.isEnabled(),
                 true, true, true, authorities);

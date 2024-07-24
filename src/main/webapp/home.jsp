@@ -92,7 +92,7 @@
             flex: 1;
             width: 100%;
             max-width: 860px; /* Adjust the max-width to center the content */
-            max-height: 420px;
+            max-height: 520px;
             align-items: center;
             padding: 24px;
             border-radius: 15px;
@@ -170,7 +170,7 @@
     <div class="links">
         <a href="#">Profil</a>
         <a href="#">Ustawienia</a>
-        <form action="/logout" method="post" id="logoutForm">
+        <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <a href="javascript:formSubmit()">Wyloguj</a>    </div>
@@ -185,7 +185,7 @@
         <h2>Użytkownicy</h2>
         <button class="btn" onclick="window.location.href='/users'">Zarządzaj użytkownikami</button>
         <button class="btn" onclick="window.location.href='/appUserRole'">Zarządzaj rolami</button>
-
+        <button class="btn" onclick="window.location.href='/usersRoles'">Przydziel role</button>
     </div>
     <div class="box">
         <h2>Moje konto</h2>

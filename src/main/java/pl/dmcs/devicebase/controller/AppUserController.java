@@ -9,12 +9,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.*;
 import pl.dmcs.devicebase.domain.AppUser;
+import pl.dmcs.devicebase.domain.AppUserRole;
+import pl.dmcs.devicebase.service.AppUserRoleService;
 import pl.dmcs.devicebase.service.AppUserService;
 import pl.dmcs.devicebase.validator.AppUserValidator;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -22,11 +24,13 @@ public class AppUserController {
 
     private final AppUserValidator appUserValidator;
     private final AppUserService appUserService;
+    private final AppUserRoleService appUserRoleService;
 
     @Autowired
-    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator) {
+    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator, AppUserRoleService appUserRoleService) {
         this.appUserService = appUserService;
         this.appUserValidator = appUserValidator;
+        this.appUserRoleService = appUserRoleService;
     }
 
     @RequestMapping(value = "/register")
@@ -44,12 +48,12 @@ public class AppUserController {
 
     @RequestMapping(value = "/addAppUser", method = RequestMethod.POST)
     public String addAppUser(@Valid @ModelAttribute("register") AppUser appUser, BindingResult result, Model model) {
-
         appUserValidator.validate(appUser, result);
 
         if (result.getErrorCount() == 0) {
-            if (appUser.getId() == 0)
+            if (appUser.getId() == 0) {
                 appUserService.addAppUser(appUser);
+            }
             return "redirect:/welcome?firstName=" + appUser.getFirstName();
         }
         model.addAttribute("appUserList", appUserService.listAppUser());
@@ -70,9 +74,7 @@ public class AppUserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String showAllUsers(Model model,
-                               @RequestParam Map<String, String> allParams) {
-
+    public String showAllUsers(Model model, @RequestParam Map<String, String> allParams) {
         List<AppUser> users = appUserService.listAppUser();
 
         // Filtrowanie
@@ -96,27 +98,6 @@ public class AppUserController {
             }).collect(Collectors.toList());
         }
 
-        // Sortowanie
-        String sortField = allParams.get("sortField");
-        String sortDir = allParams.get("sortDir");
-        if (sortField != null && sortDir != null) {
-            Comparator<AppUser> comparator;
-            switch (sortField) {
-                case "login": comparator = Comparator.comparing(AppUser::getLogin); break;
-                case "firstName": comparator = Comparator.comparing(AppUser::getFirstName); break;
-                case "lastName": comparator = Comparator.comparing(AppUser::getLastName); break;
-                case "email": comparator = Comparator.comparing(AppUser::getEmail); break;
-                case "telephoneNumber": comparator = Comparator.comparing(AppUser::getTelephoneNumber); break;
-                case "department": comparator = Comparator.comparing(AppUser::getDepartment); break;
-                case "workplace": comparator = Comparator.comparing(AppUser::getWorkplace); break;
-                default: comparator = Comparator.comparing(AppUser::getId);
-            }
-            if ("desc".equalsIgnoreCase(sortDir)) {
-                comparator = comparator.reversed();
-            }
-            users = users.stream().sorted(comparator).collect(Collectors.toList());
-        }
-
         model.addAttribute("users", users);
         return "users";
     }
@@ -129,13 +110,50 @@ public class AppUserController {
 
     @RequestMapping(value = "/approve/{appUserId}", method = RequestMethod.GET)
     public String approveUser(@PathVariable("appUserId") Long appUserId) {
-        // Przyszła logika zatwierdzania użytkownika
+        AppUser appUser = appUserService.getAppUser(appUserId);
+        if (appUser != null) {
+            appUser.setIsEnabled(true);
+            appUserService.editAppUser(appUser);
+        }
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/assignRole/{appUserId}", method = RequestMethod.GET)
-    public String assignRoleToUser(@PathVariable("appUserId") Long appUserId) {
-        // Przyszła logika przydzielania roli użytkownikowi
+    @RequestMapping(value = "/deactivate/{appUserId}", method = RequestMethod.GET)
+    public String deactivateUser(@PathVariable("appUserId") Long appUserId) {
+        AppUser appUser = appUserService.getAppUser(appUserId);
+        if (appUser != null) {
+            appUser.setIsEnabled(false);
+            appUserService.editAppUser(appUser);
+        }
         return "redirect:/users";
+    }
+
+    @RequestMapping(value = "/usersRoles", method = RequestMethod.GET)
+    public String showUsersRoles(Model model) {
+        List<AppUser> users = appUserService.listAppUser();
+        List<AppUserRole> allRoles = appUserRoleService.listAppUserRole();
+        model.addAttribute("users", users);
+        model.addAttribute("allRoles", allRoles);
+        return "usersRoles";
+    }
+
+    @RequestMapping(value = "/assignRole/{appUserId}", method = RequestMethod.GET)
+    public String showAssignRolePage(@PathVariable("appUserId") Long appUserId, Model model) {
+        AppUser appUser = appUserService.getAppUser(appUserId);
+        List<AppUserRole> allRoles = appUserRoleService.listAppUserRole();
+        model.addAttribute("user", appUser);
+        model.addAttribute("allRoles", allRoles);
+        return "assignRole";
+    }
+
+    @RequestMapping(value = "/updateUserRoles", method = RequestMethod.POST)
+    public String updateUserRoles(@RequestParam("userId") Long userId, @RequestParam("roles") List<Long> roleIds) {
+        AppUser appUser = appUserService.getAppUser(userId);
+        Set<AppUserRole> roles = roleIds.stream()
+                .map(appUserRoleService::getAppUserRole)
+                .collect(Collectors.toSet());
+        appUser.setAppUserRole(roles);
+        appUserService.editAppUser(appUser);
+        return "redirect:/usersRoles";
     }
 }

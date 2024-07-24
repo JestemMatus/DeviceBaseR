@@ -8,10 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zarządzaj rolami użytkowników</title>
+    <title>Przydziel role</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
-
     <style>
         * {
             box-sizing: border-box;
@@ -65,7 +64,6 @@
             background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
             font-size: 14px;
         }
-
 
         .header .logo {
             display: flex;
@@ -169,7 +167,6 @@
             color: #9561d2;
         }
 
-
         a {
             color: #5b79e4; /* Kolor linków */
             text-decoration: none;
@@ -180,21 +177,19 @@
             text-decoration: underline;
         }
 
-
         form {
             background: rgba(255, 255, 255, 0.2);
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
             color: #fff;
         }
 
         label, select, button {
             display: block;
             width: 100%;
-            margin: 10px 0;
-            padding: 10px;
+            margin: 5px 0;
+            padding: 5px;
         }
 
         label {
@@ -241,17 +236,6 @@
             outline: 2px solid #67105C;
         }
 
-        button {
-            background: linear-gradient(135deg, #67105C, #220039);
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, #5b79e4, #9561d2);
-            transform: scale(1.05);
-        }
 
         .footer {
             color: white;
@@ -268,7 +252,6 @@
         .content {
             padding-bottom: 1px; /* Dodanie miejsca dla stopki */
         }
-
 
         .form-container {
             display: flex;
@@ -319,21 +302,92 @@
             width: 100%;
         }
 
+        .form-container {
+            display: flex;
+        }
+
+        .box {
+            margin-right: 5px; /* Odstęp między sekcjami */
+
+        }
+
+        .box:last-child {
+            margin-right: 0; /* Usuń margines z ostatniego boxa */
+        }
+
+
+        form div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        form label {
+            margin-left: 10px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            font-weight: 500;
+            color: #67105C;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            padding: 0;
+            accent-color: #67105C; /* nowoczesny kolor checkboxa */
+        }
+
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #67105C, #220039);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #5b79e4, #9561d2);
+            transform: scale(1.05);
+        }
+
+        h3 {
+            padding: 0;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
 
 
     </style>
-
     <script>
-        function ScrollToTop(){
-            console.log("ScrollToTop function called");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
         function back(){
             window.location.href = "/home"
         }
-    </script>
 
+        function loadUserRoles(element) {
+            const userId = element.getAttribute('data-user-id');
+            const userName = element.getAttribute('data-user-name');
+            const roles = element.getAttribute('data-roles').split(',').map(Number);
+
+            document.getElementById("userId").value = userId;
+            document.getElementById("userName").value = userName;
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="roles"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = roles.includes(parseInt(checkbox.value));
+            });
+        }
+
+
+
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
+        }
+    </script>
 </head>
 <body>
 <div class="header">
@@ -353,72 +407,71 @@
 
 <div class="content">
     <div class="box-fline">
-    <h1>Zarządzaj rolami użytkowników</h1>
+        <h1>Przydziel uprawnienia</h1>
         <div class="back-div">
             <button onclick="back()">Cofnij</button>
         </div>
     </div>
 
     <div class="form-container">
+        <!-- Sekcja 1: Tabela z użytkownikami -->
         <div class="box">
-            <h2>Dodaj nową rolę</h2>
-            <form action="<c:url value='/addAppUserRole' />" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <label for="newRole">Nazwa roli:</label>
-                <input type="text" id="newRole" name="role" />
-                <button type="submit">Dodaj rolę</button>
-            </form>
+            <h2>Lista użytkowników</h2>
+            <table id="userTable">
+                <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Login</th>
+                    <th>Role</th>
+                    <th>Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="user" items="${users}">
+                    <tr>
+                        <td><c:out value="${user.firstName}" /></td>
+                        <td><c:out value="${user.lastName}" /></td>
+                        <td><c:out value="${user.login}" /></td>
+                        <td>
+                            <c:forEach var="role" items="${user.appUserRole}" varStatus="status">
+                                <c:out value="${role.role}" />
+                                <c:if test="${!status.last}"> | </c:if>
+                            </c:forEach>
+                        </td>
+                        <td class="actions">
+                            <a href="#"
+                               data-user-id="${user.id}"
+                               data-user-name="${user.firstName} ${user.lastName}"
+                               data-roles="<c:forEach var='role' items='${user.appUserRole}' varStatus='status'>${role.id}<c:if test='${!status.last}'>,</c:if></c:forEach>"
+                               onclick="loadUserRoles(this)">Edytuj</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
 
+        <!-- Sekcja 2: Formularz do edycji roli użytkownika -->
         <div class="box">
-            <h2>Edytuj rolę</h2>
-            <form action="<c:url value='/updateRole' />" method="post" id="editField">
-                <label for="roleDropdown">Wybierz rolę:</label>
-                <select id="roleDropdown" onchange="showEditField()">
-                    <option value="">--Wybierz rolę--</option>
-                    <c:forEach var="role" items="${roles}">
-                        <option value="${role.role}"><c:out value="${role.role}" /></option>
-                    </c:forEach>
-                </select>
+            <h2>Edytuj uprawnienia użytkownika</h2>
+            <form action="<c:url value='/updateUserRoles' />" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <label for="roleName">Nazwa roli:</label>
-                <input type="text" id="roleName" name="role" />
-                <button type="submit">Edytuj rolę</button>
+                <input type="hidden" id="userId" name="userId" />
+                <h3><label for="userName">Nazwa użytkownika:</label></h3>
+                <input type="text" id="userName" name="userName" readonly />
+                <h3><label>Dostępne uprawnienia:</label></h3>
+                <c:forEach var="role" items="${allRoles}">
+                    <div>
+                        <input type="checkbox" id="role_${role.id}" name="roles" value="${role.id}" />
+                        <label for="role_${role.id}"><c:out value="${role.role}" /></label>
+                    </div>
+                </c:forEach>
+                <button type="submit">Zatwierdź</button>
             </form>
         </div>
     </div>
-
-    <!-- Wiadomość o błędzie -->
-    <c:if test="${not empty error}">
-        <div class="box">
-            <p><c:out value="${error}" /></p>
-        </div>
-    </c:if>
 </div>
-<div class="box role-box">
-    <h2>Istniejące role</h2>
-    <table>
-        <tr>
-            <th>Nazwa roli</th>
-            <th>Akcje</th>
-        </tr>
-        <c:forEach var="role" items="${roles}">
-            <tr>
-                <td><c:out value="${role.role}" /></td>
-                <td>
-                    <a href="<c:url value='/deleteRole/${role.id}' />">Usuń</a>
-                    <a href="#">Szczegóły</a>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
-</div>
-<div class="top-class">
-    <button onclick="ScrollToTop()">
-        <img src="resources/up.png" alt="Top" class="top-image">
-    </button>
-</div>
-
 
 <div class="footer">
     <p>&copy; <%= new SimpleDateFormat("EEEE, d MMMM yyyy", new Locale("pl", "PL")).format(new Date()) %> - Wszystkie prawa zastrzeżone</p>

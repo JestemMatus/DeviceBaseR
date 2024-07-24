@@ -10,6 +10,7 @@ import pl.dmcs.devicebase.repository.AppUserRepository;
 import pl.dmcs.devicebase.repository.AppUserRoleRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppUserServiceImpl implements AppUserService{
@@ -42,8 +43,6 @@ public class AppUserServiceImpl implements AppUserService{
     @Transactional
     @Override
     public void editAppUser(AppUser appUser) {
-        appUser.getAppUserRole().add(appUserRoleRepository.findByRole("ROLE_USER"));
-        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUserRepository.save(appUser);
     }
 
@@ -87,5 +86,6 @@ public class AppUserServiceImpl implements AppUserService{
     public AppUser findByLogin(String login) {
         return appUserRepository.findByLogin(login);
     }
+
 
 }

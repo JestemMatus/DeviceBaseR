@@ -10,21 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f92e6d-acbc-46ac-9b47-f3d5c2486ffe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserRoleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/MyAppUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/scrollToTop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/ScrollToTop.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/usersRoles.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserRoleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/MyAppUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/MyAppUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/i18n/messages_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/users.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +36,8 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="Jsp File" />
       </list>
     </option>
@@ -79,7 +80,8 @@
     "Tomcat Server.hello.jsp.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Matus/OneDrive/Pulpit/ProjektKapj/Przychodnia3",
+    "last_opened_file_path": "C:/Users/Matus/DeviceBaseProject/DeviceBase",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,6 +98,7 @@
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\WEB-INF" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources\js" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources\fonts" />
@@ -104,6 +107,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.0.0-M9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.0.0-M9" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17" nameIsGenerated="true">
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="DeviceBase:war exploded">
@@ -213,7 +217,8 @@
       <workItem from="1720763814972" duration="14005000" />
       <workItem from="1721042294317" duration="38319000" />
       <workItem from="1721376520293" duration="20367000" />
-      <workItem from="1721628177096" duration="25578000" />
+      <workItem from="1721628177096" duration="25727000" />
+      <workItem from="1721802234097" duration="25990000" />
     </task>
     <servers />
   </component>

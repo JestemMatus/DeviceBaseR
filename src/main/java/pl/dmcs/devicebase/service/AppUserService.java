@@ -16,4 +16,5 @@ public interface AppUserService {
     boolean isPhoneNumberUnique(String phoneNumber);
 
     AppUser findByLogin(String login);
+
 }
