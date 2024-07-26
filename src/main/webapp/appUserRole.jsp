@@ -373,6 +373,7 @@
         <div class="box">
             <h2>Edytuj rolę</h2>
             <form action="<c:url value='/updateRole' />" method="post" id="editField">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <label for="roleDropdown">Wybierz rolę:</label>
                 <select id="roleDropdown" onchange="showEditField()">
                     <option value="">--Wybierz rolę--</option>

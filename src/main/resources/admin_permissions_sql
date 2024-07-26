@@ -1,0 +1,6 @@
+INSERT INTO endpoint_permission (endpoint, role_id) VALUES
+('/users**', (SELECT id FROM appuserrole WHERE role = 'ROLE_ADMIN')),
+('/home**', (SELECT id FROM appuserrole WHERE role = 'ROLE_ADMIN')),
+('/appUserRole*', (SELECT id FROM appuserrole WHERE role = 'ROLE_ADMIN')),
+('/addAppUserRole**', (SELECT id FROM appuserrole WHERE role = 'ROLE_ADMIN')),
+('/usersRoles**', (SELECT id FROM appuserrole WHERE role = 'ROLE_ADMIN'));

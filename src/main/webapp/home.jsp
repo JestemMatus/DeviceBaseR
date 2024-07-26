@@ -185,6 +185,7 @@
         <h2>Użytkownicy</h2>
         <button class="btn" onclick="window.location.href='/users'">Zarządzaj użytkownikami</button>
         <button class="btn" onclick="window.location.href='/appUserRole'">Zarządzaj rolami</button>
+        <button class="btn" onclick="window.location.href='/permission-management'">Zarządzaj endpointami</button>
         <button class="btn" onclick="window.location.href='/usersRoles'">Przydziel role</button>
     </div>
     <div class="box">
