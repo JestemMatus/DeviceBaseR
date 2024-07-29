@@ -133,7 +133,7 @@
     <div class="links">
         <a href="login">Zaloguj się</a>
         <a href="register">Utwórz konto</a>
-        <a href="#">Pomoc</a>
+        <a href="/ComingSoon">Pomoc</a>
     </div>
 </div>
 

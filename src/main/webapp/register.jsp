@@ -588,7 +588,7 @@
     <div class="links">
         <a href="login">Zaloguj się</a>
         <a href="/">Strona główna</a>
-        <a href="#">Pomoc</a>
+        <a href="/ComingSoon">Pomoc</a>
     </div>
 </div>
 

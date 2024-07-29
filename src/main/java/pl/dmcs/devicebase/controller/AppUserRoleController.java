@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import pl.dmcs.devicebase.domain.AppUserRole;
 import pl.dmcs.devicebase.service.AppUserRoleService;
 
@@ -34,14 +35,22 @@ public class AppUserRoleController {
     }
 
     @RequestMapping(value = "/deleteRole/{roleId}", method = RequestMethod.GET)
-    public String deleteUserRole(@PathVariable("roleId") long roleId, Model model) {
+    public ModelAndView deleteUserRole(@PathVariable("roleId") long roleId) {
+        ModelAndView modelAndView = new ModelAndView("appUserRole");
+
         try {
             appUserRoleService.deleteUserRole(roleId);
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
+            modelAndView.addObject("error", e.getMessage());
         }
-        return "redirect:/appUserRole";
+
+        List<AppUserRole> roles = appUserRoleService.listAppUserRole();
+        modelAndView.addObject("roles", roles);
+        modelAndView.addObject("appUserRole", new AppUserRole());
+
+        return modelAndView;
     }
+
 
     @RequestMapping(value = "/updateRole", method = RequestMethod.POST)
     public String updateUserRole(@RequestParam("role") String role, @RequestParam("newRole") String newRole, Model model) {
@@ -56,5 +65,5 @@ public class AppUserRoleController {
         }
         return "redirect:/appUserRole";
     }
-}
 
+}

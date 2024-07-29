@@ -139,7 +139,7 @@
     <p>Nie masz uprawnień do tego zasobu. Aby uzyskać dostęp, upewnij się że masz do nich prawo, a następnie skontaktuj się z administratorem.</p>
     <a href="javascript:void(0);" onclick="goBack()" class="check-permissions">Wróć</a>
     <br>
-    <a href="#" class="check-permissions">Sprawdź swoje uprawnienia</a>
+    <a href="/ComingSoon" class="check-permissions">Sprawdź swoje uprawnienia</a>
 </div>
 </body>
 </html>

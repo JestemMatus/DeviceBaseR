@@ -11,4 +11,5 @@ public interface AppUserRoleService {
     void deleteUserRole(long id);
     void updateAppUserRole(AppUserRole appUserRole);
     AppUserRole findByRole(String role);
+
 }

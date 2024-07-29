@@ -322,6 +322,16 @@
             width: 100%;
         }
 
+        .error-box {
+            width: 97%;
+            background-color: white;
+            color: red;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+
 
 
     </style>
@@ -346,7 +356,7 @@
     <div class="links">
         <a href="#">Zaloguj się</a>
         <a href="/home">Strona główna</a>
-        <a href="#">Pomoc</a>
+        <a href="/ComingSoon">Pomoc</a>
         <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
@@ -356,7 +366,7 @@
 
 <div class="content">
     <div class="box-fline">
-    <h1>Zarządzaj rolami użytkowników</h1>
+        <h1>Zarządzaj rolami użytkowników</h1>
         <div class="back-div">
             <button onclick="back()">Cofnij</button>
         </div>
@@ -371,6 +381,7 @@
                 <input type="text" id="newRole" name="role" />
                 <button type="submit">Dodaj rolę</button>
             </form>
+            <h3>Pamiętaj, aby nazwa roli zaczynała się od przedrostka "ROLE_" i była zapisana wielkimi literami.</h3>
         </div>
 
         <div class="box">
@@ -378,51 +389,49 @@
             <form action="<c:url value='/updateRole' />" method="post" id="editField">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <label for="roleDropdown">Wybierz rolę:</label>
-                <select id="roleDropdown" onchange="showEditField()">
+                <select id="roleDropdown" name="role" onchange="showEditField()">
                     <option value="">--Wybierz rolę--</option>
                     <c:forEach var="role" items="${roles}">
                         <option value="${role.role}"><c:out value="${role.role}" /></option>
                     </c:forEach>
                 </select>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <label for="roleName">Nazwa roli:</label>
-                <input type="text" id="roleName" name="role" />
+                <label for="newRole">Nazwa roli:</label>
+                <input type="text" id="newRole" name="newRole" />
                 <button type="submit">Edytuj rolę</button>
             </form>
         </div>
+
     </div>
 
-    <!-- Wiadomość o błędzie -->
+    <div class="box role-box">
+        <h2>Istniejące role</h2>
+        <table>
+            <tr>
+                <th>Nazwa roli</th>
+                <th>Akcje</th>
+            </tr>
+            <c:forEach var="role" items="${roles}">
+                <tr>
+                    <td><c:out value="${role.role}" /></td>
+                    <td>
+                        <a href="<c:url value='/deleteRole/${role.id}' />">Usuń</a>
+                        <a href="/ComingSoon">Szczegóły</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
     <c:if test="${not empty error}">
-        <div class="box">
+        <div class="error-box">
             <p><c:out value="${error}" /></p>
         </div>
     </c:if>
-<div class="box role-box">
-    <h2>Istniejące role</h2>
-    <table>
-        <tr>
-            <th>Nazwa roli</th>
-            <th>Akcje</th>
-        </tr>
-        <c:forEach var="role" items="${roles}">
-            <tr>
-                <td><c:out value="${role.role}" /></td>
-                <td>
-                    <a href="<c:url value='/deleteRole/${role.id}' />">Usuń</a>
-                    <a href="#">Szczegóły</a>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
+    <div class="top-class">
+        <button onclick="ScrollToTop()">
+            <img src="resources/up.png" alt="Top" class="top-image">
+        </button>
+    </div>
 </div>
-<div class="top-class">
-    <button onclick="ScrollToTop()">
-        <img src="resources/up.png" alt="Top" class="top-image">
-    </button>
-</div>
-</div>
-
 
 <div class="footer">
     <p>&copy; <%= new SimpleDateFormat("EEEE, d MMMM yyyy", new Locale("pl", "PL")).format(new Date()) %> - Wszystkie prawa zastrzeżone</p>

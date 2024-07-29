@@ -10,10 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f92e6d-acbc-46ac-9b47-f3d5c2486ffe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/ComingSoonController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/ComingSoon.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/AppUserRoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/PermissionManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/PermissionManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/AppUserRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/accessDenied.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/accessDenied.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/hello.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/hello.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/permissionManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/permissionManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/users.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/usersRoles.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/usersRoles.jsp" afterDir="false" />
     </list>
@@ -89,9 +100,9 @@
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\WEB-INF" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources\js" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources" />
-      <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\resources\fonts" />
       <recent name="C:\Users\Matus\DeviceBaseProject\DeviceBase\src\main\webapp\WEB-INF" />
     </key>
@@ -211,7 +222,7 @@
       <workItem from="1721628177096" duration="25727000" />
       <workItem from="1721802234097" duration="26722000" />
       <workItem from="1721974161591" duration="26215000" />
-      <workItem from="1722232757364" duration="6724000" />
+      <workItem from="1722232757364" duration="23320000" />
     </task>
     <servers />
   </component>

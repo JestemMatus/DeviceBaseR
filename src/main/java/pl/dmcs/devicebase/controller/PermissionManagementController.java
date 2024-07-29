@@ -31,6 +31,10 @@ public class PermissionManagementController {
         List<AppUserRole> roles = appUserRoleService.listAppUserRole();
         model.addAttribute("roles", roles);
 
+        if (roleId == null && !roles.isEmpty()) {
+            roleId = roles.get(0).getId(); // Domyślnie wybierz pierwszą rolę z listy
+        }
+
         if (roleId != null) {
             AppUserRole role = appUserRoleService.getAppUserRole(roleId);
             List<EndpointPermission> permissions = permissionService.getPermissionsForRole(role.getRole());
@@ -48,6 +52,7 @@ public class PermissionManagementController {
         model.addAttribute("endpointPermission", new EndpointPermission());
         return "permissionManagement";
     }
+
 
     @PostMapping("/update")
     public String updatePermissions(@RequestParam("roleId") Long roleId, @RequestParam(value = "endpointIds", required = false) List<Long> endpointIds) {

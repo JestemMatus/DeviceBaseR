@@ -390,7 +390,7 @@
 
         #userTable tbody {
             display: block;
-            max-height: 400px;
+            max-height: 398px;
             overflow-y: auto;
         }
 
@@ -407,61 +407,167 @@
             white-space: nowrap;
         }
 
-        #userTable th:nth-child(1), #userTable td:nth-child(1) { width: 20%; }
-        #userTable th:nth-child(2), #userTable td:nth-child(2) { width: 20%; }
-        #userTable th:nth-child(3), #userTable td:nth-child(3) { width: 20%; }
-        #userTable th:nth-child(4), #userTable td:nth-child(4) { width: 22%; }
-        #userTable th:nth-child(5), #userTable td:nth-child(5) { width: 16%; }
+        #userTable th:nth-child(1), #userTable td:nth-child(1) { width: 12%; }
+        #userTable th:nth-child(2), #userTable td:nth-child(2) { width: 18%; }
+        #userTable th:nth-child(3), #userTable td:nth-child(3) { width: 16%; }
+        #userTable th:nth-child(4), #userTable td:nth-child(4) { width: 30%; }
+        #userTable th:nth-child(5), #userTable td:nth-child(5) { width: 22%; }
 
         #userTable th:nth-child(6) { width: 2%; }
 
-        .roles-container {
-            max-height: 200px; /* Maksymalna wysokość dla listy uprawnień */
-            overflow-y: auto; /* Przewijanie w pionie, jeśli zawartość przekracza maksymalną wysokość */
-        }
-
-        .roles-container table {
+        #rolesTable {
             width: 100%;
             border-collapse: collapse;
-            box-shadow: none;
+            margin-top: 10px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.9); /* Jasne tło dla tabeli */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Lżejszy cień */
+            border-radius: 10px; /* Dodaj border-radius bezpośrednio do tabeli */
+            overflow: hidden;
         }
 
-        .roles-container td {
-            padding: 5px;
-            vertical-align: middle;
+        #rolesTable thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: #67105C; /* Kolor tła nagłówka */
+            color: white;
         }
 
-        .roles-container label {
-            margin-left: 10px;
+        #rolesTable tbody {
+            display: block;
+            max-height: 200px; /* Ustal maksymalną wysokość dla tbody */
+            overflow-y: auto;
+        }
+
+        #rolesTable thead, #rolesTable tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        #rolesTable th, #rolesTable td {
+            padding-left: 15px; /* Zwiększenie paddingu dla lepszej czytelności */
+            padding-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        #rolesTable th {
+            background-color: #67105C; /* Użycie ciemniejszego koloru tła dla nagłówków */
+            color: white;
             font-weight: 500;
-            color: #67105C;
+            cursor: pointer;
+            user-select: none;
+            padding: 15px;
+            text-align: center;
+        }
+
+        #rolesTable td {
+            background: #ffffff; /* Jasne tło dla komórek */
+            color: #333; /* Ciemniejszy tekst dla lepszej czytelności */
+        }
+
+        #rolesTable tr:nth-child(even) td {
+            background: #f0f0f0; /* Kontrastujące, ale jasne tło dla co drugiego wiersza */
+        }
+
+        #rolesTable tr:hover td {
+            background: #e0e0e0; /* Kolor tła wiersza po najechaniu */
+        }
+
+        #rolesTable th:nth-child(1), #rolesTable td:nth-child(1) { width: 13%; }
+        #rolesTable th:nth-child(2), #rolesTable td:nth-child(2) { width: 85%; }
+        #rolesTable th:nth-child(3) { width: 2%; }
+
+        .filter-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 0 auto 20px auto; /* Wyśrodkowanie pola i margines dolny */
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-input:focus {
+            border-color: #67105C;
+            box-shadow: 0 0 10px rgba(103, 16, 92, 0.5);
+            outline: none;
         }
 
 
     </style>
     <script>
         function back(){
-        window.location.href = "/home"
+            window.location.href = "/home"
         }
 
         function loadUserRoles(element) {
-        const userId = element.getAttribute('data-user-id');
-        const userName = element.getAttribute('data-user-name');
-        const roles = element.getAttribute('data-roles').split(',').map(Number);
+            const userId = element.getAttribute('data-user-id');
+            const userName = element.getAttribute('data-user-name');
+            const roles = element.getAttribute('data-roles').split(',').map(Number);
 
-        document.getElementById("userId").value = userId;
-        document.getElementById("userName").value = userName;
-        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="roles"]');
-        checkboxes.forEach(checkbox => {
-        checkbox.checked = roles.includes(parseInt(checkbox.value));
-        });
+            document.getElementById("userId").value = userId;
+            document.getElementById("userName").value = userName;
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="roles"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = roles.includes(parseInt(checkbox.value));
+            });
 
-        document.getElementById("submitButton").disabled = false;
+            document.getElementById("submitButton").disabled = false;
         }
 
         function formSubmit() {
-        document.getElementById("logoutForm").submit();
+            document.getElementById("logoutForm").submit();
         }
+
+        // Filtrowanie użytkowników
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterInput = document.querySelector('.filter-input');
+
+            filterInput.addEventListener('keyup', function() {
+                const filterValue = filterInput.value.toLowerCase();
+                const rows = document.querySelectorAll('#userTable tbody tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(filterValue));
+                    row.style.display = match ? '' : 'none';
+                });
+            });
+
+            // Sortowanie po nagłówkach
+            const headers = document.querySelectorAll('#userTable th');
+            headers.forEach((header, index) => {
+                header.addEventListener('click', function() {
+                    const tableBody = document.querySelector('#userTable tbody');
+                    const rows = Array.from(tableBody.querySelectorAll('tr'));
+                    const isAscending = header.classList.contains('asc');
+                    const direction = isAscending ? -1 : 1;
+
+                    headers.forEach(th => th.classList.remove('asc', 'desc'));
+                    header.classList.toggle('asc', !isAscending);
+                    header.classList.toggle('desc', isAscending);
+
+                    rows.sort((a, b) => {
+                        const cellA = a.children[index].textContent.trim().toLowerCase();
+                        const cellB = b.children[index].textContent.trim().toLowerCase();
+
+                        if (cellA < cellB) return -1 * direction;
+                        if (cellA > cellB) return 1 * direction;
+                        return 0;
+                    });
+
+                    rows.forEach(row => tableBody.appendChild(row));
+                });
+            });
+        });
+
+
     </script>
 </head>
 <body>
@@ -470,9 +576,9 @@
         <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
-        <a href="#">Zaloguj się</a>
+        <a href="">Zaloguj się</a>
         <a href="/home">Strona główna</a>
-        <a href="#">Pomoc</a>
+        <a href="/ComingSoon">Pomoc</a>
         <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
@@ -492,6 +598,7 @@
         <!-- Sekcja 1: Tabela z użytkownikami -->
         <div class="box">
             <h2>Lista użytkowników</h2>
+            <input type="text" class="filter-input" placeholder="Filtruj użytkowników">
             <table id="userTable">
                 <thead>
                 <tr>
@@ -521,6 +628,7 @@
                                data-user-name="${user.firstName} ${user.lastName}"
                                data-roles="<c:forEach var='role' items='${user.appUserRole}' varStatus='status'>${role.id}<c:if test='${!status.last}'>,</c:if></c:forEach>"
                                onclick="loadUserRoles(this)">Edytuj</a>
+                            <a href="/ComingSoon">Więcej</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -538,7 +646,14 @@
                 <input type="text" id="userName" name="userName" readonly />
                 <h3><label>Dostępne uprawnienia:</label></h3>
                 <div class="roles-container">
-                    <table>
+                    <table id="rolesTable">
+                        <thead>
+                        <tr>
+                            <th>Wybierz</th>
+                            <th>Uprawnienie</th>
+                            <th></th>
+                        </tr>
+                        </thead>
                         <tbody>
                         <c:forEach var="role" items="${allRoles}">
                             <tr>
@@ -553,6 +668,7 @@
                         </tbody>
                     </table>
                 </div>
+
                 <button type="submit" id="submitButton" disabled>Zatwierdź</button>
             </form>
         </div>

@@ -168,8 +168,8 @@
         <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
-        <a href="#">Profil</a>
-        <a href="#">Ustawienia</a>
+        <a href="/ComingSoon">Profil</a>
+        <a href="/ComingSoon">Ustawienia</a>
         <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>

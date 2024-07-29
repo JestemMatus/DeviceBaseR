@@ -10,6 +10,8 @@
 <head>
     <title>Użytkownicy</title>
     <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -103,8 +105,7 @@
             padding: 30px 40px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             text-align: center;
-            width: 90%;
-            max-width: 1400px;
+            width: 100%;
             margin: 50px;
             border-radius: 20px;
         }
@@ -410,7 +411,7 @@
     <div class="links">
         <a href="#">Zaloguj się</a>
         <a href="/home">Strona główna</a>
-        <a href="#">Pomoc</a>
+        <a href="/ComingSoon">Pomoc</a>
         <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
@@ -510,6 +511,11 @@
             </c:forEach>
             </tbody>
         </table>
+    </div>
+    <div class="top-class">
+        <button onclick="ScrollToTop()">
+            <img src="resources/up.png" alt="Top" class="top-image">
+        </button>
     </div>
 </div>
 <div class="footer">

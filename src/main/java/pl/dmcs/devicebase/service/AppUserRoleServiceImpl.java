@@ -3,7 +3,9 @@ package pl.dmcs.devicebase.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.dmcs.devicebase.domain.AppUser;
 import pl.dmcs.devicebase.domain.AppUserRole;
+import pl.dmcs.devicebase.repository.AppUserRepository;
 import pl.dmcs.devicebase.repository.AppUserRoleRepository;
 
 import java.util.List;
@@ -12,10 +14,12 @@ import java.util.List;
 public class AppUserRoleServiceImpl implements AppUserRoleService {
 
     private final AppUserRoleRepository appUserRoleRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public AppUserRoleServiceImpl(AppUserRoleRepository appUserRoleRepository) {
+    public AppUserRoleServiceImpl(AppUserRoleRepository appUserRoleRepository, AppUserRepository appUserRepository) {
         this.appUserRoleRepository = appUserRoleRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     @Transactional
@@ -39,7 +43,16 @@ public class AppUserRoleServiceImpl implements AppUserRoleService {
     @Transactional
     @Override
     public void deleteUserRole(long id) {
-        appUserRoleRepository.deleteById(id);
+        AppUserRole role = appUserRoleRepository.findById(id).orElse(null);
+        if (role != null) {
+            List<AppUser> usersWithRole = appUserRepository.findAll().stream()
+                    .filter(user -> user.getAppUserRole().contains(role))
+                    .toList();
+            if (!usersWithRole.isEmpty()) {
+                throw new IllegalArgumentException("Nie można usunąć roli, ponieważ jest przypisana do jednego lub więcej użytkowników.");
+            }
+            appUserRoleRepository.delete(role);
+        }
     }
 
     @Transactional
