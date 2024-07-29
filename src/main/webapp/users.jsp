@@ -90,18 +90,23 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            width: 100%;
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 60px;
+            background-color: rgba(255,255,255, 0.2);
+            border-radius: 20px;
+
         }
 
         .box {
             background-color: white;
             padding: 30px 40px;
-            border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             text-align: center;
             width: 90%;
             max-width: 1400px;
-            margin: 100px;
+            margin: 50px;
+            border-radius: 20px;
         }
 
         .box h1 {
@@ -497,7 +502,7 @@
                         </div>
                         <div class="action-group">
                             <a href="javascript:confirmAction('<c:url value='/deactivate/${user.id}' />', 'Czy na pewno chcesz dezaktywować tego użytkownika?')">Dezaktywuj</a> |
-                            <a href="<c:url value='/assignRole/${user.id}' />">Role</a> |
+                            <a href="<c:url value='/usersRoles' />">Role</a> |
                             <a href="<c:url value='/assignRole/${user.id}' />">Więcej</a>
                         </div>
                     </td>

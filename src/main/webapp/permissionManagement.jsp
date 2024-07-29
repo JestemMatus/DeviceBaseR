@@ -87,10 +87,14 @@
         .content {
             flex: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
-            width: 100%;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 60px;
+            background-color: rgba(255,255,255, 0.2);
+            border-radius: 20px;
         }
 
         .box {

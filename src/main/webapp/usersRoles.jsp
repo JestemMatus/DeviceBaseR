@@ -101,8 +101,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 90%;
+            margin: 0 auto;
             margin-top: 60px;
-            width: 100%;
+            background-color: rgba(255,255,255, 0.2);
+            border-radius: 20px;
         }
 
         .box {
@@ -126,7 +129,7 @@
             font-size: 14px;
             background: rgba(255, 255, 255, 0.9); /* Jasne tło dla tabeli */
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Lżejszy cień */
-            border-radius: 10px;
+            border-radius: 10px; /* Dodaj border-radius bezpośrednio do tabeli */
             overflow: hidden;
         }
 
@@ -278,15 +281,23 @@
             margin-bottom: 20px;
             margin-top: 0;
             padding-top: 0;
+            min-height: 120px;
             max-width: calc(1620px);
             width: 100%;
             flex: 1;
             position: relative; /* Add this line */
+            height: 100%;
+            max-height: 100px;
+            display: flex;
+            align-items: center; /* Wyśrodkowanie pionowe */
+            justify-content: center;
         }
 
         .box-fline h1 {
+            padding-top: 15px;
             color: #67105C;
             text-align: center; /* Center the text */
+            margin: 0 auto;
         }
 
         .back-div {
@@ -308,7 +319,6 @@
 
         .box {
             margin-right: 5px; /* Odstęp między sekcjami */
-
         }
 
         .box:last-child {
@@ -362,30 +372,95 @@
             font-size: 20px;
         }
 
+        #userTable {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            table-layout: fixed;
+        }
+
+        #userTable thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: #67105C; /* Kolor tła nagłówka */
+            color: white;
+        }
+
+        #userTable tbody {
+            display: block;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        #userTable thead, #userTable tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        #userTable td, #userTable th {
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #userTable th:nth-child(1), #userTable td:nth-child(1) { width: 20%; }
+        #userTable th:nth-child(2), #userTable td:nth-child(2) { width: 20%; }
+        #userTable th:nth-child(3), #userTable td:nth-child(3) { width: 20%; }
+        #userTable th:nth-child(4), #userTable td:nth-child(4) { width: 22%; }
+        #userTable th:nth-child(5), #userTable td:nth-child(5) { width: 16%; }
+
+        #userTable th:nth-child(6) { width: 2%; }
+
+        .roles-container {
+            max-height: 200px; /* Maksymalna wysokość dla listy uprawnień */
+            overflow-y: auto; /* Przewijanie w pionie, jeśli zawartość przekracza maksymalną wysokość */
+        }
+
+        .roles-container table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: none;
+        }
+
+        .roles-container td {
+            padding: 5px;
+            vertical-align: middle;
+        }
+
+        .roles-container label {
+            margin-left: 10px;
+            font-weight: 500;
+            color: #67105C;
+        }
+
 
     </style>
     <script>
         function back(){
-            window.location.href = "/home"
+        window.location.href = "/home"
         }
 
         function loadUserRoles(element) {
-            const userId = element.getAttribute('data-user-id');
-            const userName = element.getAttribute('data-user-name');
-            const roles = element.getAttribute('data-roles').split(',').map(Number);
+        const userId = element.getAttribute('data-user-id');
+        const userName = element.getAttribute('data-user-name');
+        const roles = element.getAttribute('data-roles').split(',').map(Number);
 
-            document.getElementById("userId").value = userId;
-            document.getElementById("userName").value = userName;
-            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="roles"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = roles.includes(parseInt(checkbox.value));
-            });
+        document.getElementById("userId").value = userId;
+        document.getElementById("userName").value = userName;
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="roles"]');
+        checkboxes.forEach(checkbox => {
+        checkbox.checked = roles.includes(parseInt(checkbox.value));
+        });
+
+        document.getElementById("submitButton").disabled = false;
         }
 
-
-
         function formSubmit() {
-            document.getElementById("logoutForm").submit();
+        document.getElementById("logoutForm").submit();
         }
     </script>
 </head>
@@ -425,6 +500,7 @@
                     <th>Login</th>
                     <th>Role</th>
                     <th>Akcje</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -461,15 +537,26 @@
                 <h3><label for="userName">Nazwa użytkownika:</label></h3>
                 <input type="text" id="userName" name="userName" readonly />
                 <h3><label>Dostępne uprawnienia:</label></h3>
-                <c:forEach var="role" items="${allRoles}">
-                    <div>
-                        <input type="checkbox" id="role_${role.id}" name="roles" value="${role.id}" />
-                        <label for="role_${role.id}"><c:out value="${role.role}" /></label>
-                    </div>
-                </c:forEach>
-                <button type="submit">Zatwierdź</button>
+                <div class="roles-container">
+                    <table>
+                        <tbody>
+                        <c:forEach var="role" items="${allRoles}">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="role_${role.id}" name="roles" value="${role.id}" />
+                                </td>
+                                <td>
+                                    <label for="role_${role.id}"><c:out value="${role.role}" /></label>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" id="submitButton" disabled>Zatwierdź</button>
             </form>
         </div>
+
     </div>
 </div>
 

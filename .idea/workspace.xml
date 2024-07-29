@@ -10,24 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f92e6d-acbc-46ac-9b47-f3d5c2486ffe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/DataInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/PermissionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/controller/PermissionManagementController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/Endpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/domain/EndpointPermission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/EndpointPermissionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/repository/EndpointRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/PermissionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/PermissionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/admin_permissions_sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/permissionManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/configuration/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/dmcs/devicebase/service/AppUserRoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/accessDenied.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/accessDenied.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/appUserRole.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/permissionManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/permissionManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/users.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/users.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/usersRoles.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/usersRoles.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +210,8 @@
       <workItem from="1721376520293" duration="20367000" />
       <workItem from="1721628177096" duration="25727000" />
       <workItem from="1721802234097" duration="26722000" />
-      <workItem from="1721974161591" duration="25282000" />
+      <workItem from="1721974161591" duration="26215000" />
+      <workItem from="1722232757364" duration="6724000" />
     </task>
     <servers />
   </component>

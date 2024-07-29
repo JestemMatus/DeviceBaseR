@@ -103,8 +103,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 90%;
+            margin: 0 auto;
             margin-top: 60px;
-            width: 100%;
+            background-color: rgba(255,255,255, 0.2);
+            border-radius: 20px;
         }
 
         .box {
@@ -293,7 +296,7 @@
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
-            margin-top: 0;
+            margin-top: 30px;
             padding-top: 0;
             max-width: calc(1620px);
             width: 100%;
@@ -395,7 +398,6 @@
             <p><c:out value="${error}" /></p>
         </div>
     </c:if>
-</div>
 <div class="box role-box">
     <h2>Istniejące role</h2>
     <table>
@@ -418,6 +420,7 @@
     <button onclick="ScrollToTop()">
         <img src="resources/up.png" alt="Top" class="top-image">
     </button>
+</div>
 </div>
 
 
