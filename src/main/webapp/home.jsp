@@ -102,7 +102,7 @@
 
 
         .box {
-            background-color: white;
+            background-color: whitesmoke;
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
@@ -168,7 +168,7 @@
         <img src="resources/wod2.png" alt="Logo">
     </div>
     <div class="links">
-        <a href="/ComingSoon">Profil</a>
+        <a href="/profile">Profil</a>
         <a href="/ComingSoon">Ustawienia</a>
         <form action="/logout" method="post" id="logoutForm" style="display: none;">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -190,7 +190,7 @@
     </div>
     <div class="box">
         <h2>Moje konto</h2>
-        <button class="btn">Zarządzaj kontem</button>
+        <button class="btn" onclick="window.location.href='/profile'">Zarządzaj kontem</button>
     </div>
     <div class="box">
         <h2>Test</h2>

@@ -11,6 +11,7 @@
 <head>
     <title>Permission Management</title>
     <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/goBack.css' />" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -98,7 +99,7 @@
         }
 
         .box {
-            background-color: white;
+            background-color: whitesmoke;
             padding: 30px 40px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
@@ -231,12 +232,12 @@
         }
 
         .box-fline {
-            background-color: white;
+            background-color: whitesmoke;
             color: #67105C;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            margin-top: 30px;
+            margin-top: 60px;
             padding-top: 0;
             width: 90%;
             flex: 1;
@@ -249,19 +250,6 @@
             padding-top: 20px;
             color: #67105C;
             text-align: center; /* Center the text */
-        }
-
-        .back-div {
-            position: absolute;
-            top: 50%; /* Center vertically */
-            left: 20px; /* Adjust the right position as needed */
-            transform: translateY(-50%); /* Center vertically */
-            background-color: whitesmoke;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            max-width: 180px;
-            width: 100%;
         }
 
         .table-wrapper {
@@ -309,20 +297,10 @@
 
 
     </style>
-    <script>
-        function ScrollToTop(){
-            console.log("ScrollToTop function called");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function back(){
-            window.location.href = "/home"
-        }
-    </script>
+    <script src="<c:url value='/resources/js/goBack.js' />"></script>
     <script src="<c:url value='/resources/js/ScrollToTop.js' />"></script>
 </head>
 <body>
-
 <div class="header">
     <div class="logo">
         <img src="resources/wod2.png" alt="Logo">
@@ -341,30 +319,27 @@
 <div class="content">
     <div class="box-fline">
         <h1>Zarządzanie dostępem</h1>
-        <div class="back-div">
-            <button onclick="back()">Cofnij</button>
-        </div>
     </div>
     <div class="box">
-            <form action="${pageContext.request.contextPath}/permission-management" method="get">
-                <div class="filter-box">
-                    <table>
-                        <tr>
-                            <th>Wybierz rolę</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <select name="roleId" onchange="this.form.submit()">
-                                    <c:forEach var="role" items="${roles}">
-                                        <option value="${role.id}" <c:if test="${role.id == selectedRoleId}">selected</c:if>>${role.role}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
+        <form action="${pageContext.request.contextPath}/permission-management" method="get">
+            <div class="filter-box">
+                <table>
+                    <tr>
+                        <th>Wybierz rolę</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="roleId" onchange="this.form.submit()">
+                                <c:forEach var="role" items="${roles}">
+                                    <option value="${role.id}" <c:if test="${role.id == selectedRoleId}">selected</c:if>>${role.role}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
         <form action="${pageContext.request.contextPath}/permission-management/update" method="post">
             <input type="hidden" name="roleId" value="${selectedRoleId}" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -396,7 +371,14 @@
                     </table>
                 </div>
             </div>
-
+            <div class="top-class">
+                <button type="button" onclick="ScrollToTop()">
+                    <img src="resources/up.png" alt="Top" class="top-image">
+                </button>
+            </div>
+            <div class="back-div">
+                <button type="button" onclick="goBack()">Cofnij</button>
+            </div>
 
             <input type="submit" value="Aktualizuj uprawnienia" class="${selectedRoleId == null ? 'hidden' : ''}" id="updateButton"/>
         </form>

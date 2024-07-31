@@ -1,0 +1,13 @@
+.back-div {
+    position: fixed;
+    top: 100px;
+    left: 10px; /* Adjust the right position as needed */
+    transform: translateY(-50%); /* Center vertically */
+    padding: 0;
+    max-width: 120px;
+    width: 100%;
+}
+
+.back-div #back-button {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}

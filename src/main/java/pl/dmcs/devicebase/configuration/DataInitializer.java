@@ -98,14 +98,21 @@ public class DataInitializer {
             endpoint6.setLabel("Zarządzanie uprawnieniami");
             endpointRepository.save(endpoint6);
 
-            // Tworzenie uprawnień
+            Endpoint endpoint7 = new Endpoint();
+            endpoint7.setId(7L);
+            endpoint7.setDescription("Przeglądanie profilu obecnie zalogowanego użytkownika");
+            endpoint7.setEndpoint("/profile**");
+            endpoint7.setLabel("Profil użytkownika");
+            endpointRepository.save(endpoint7);
+
             List<EndpointPermission> permissions = Arrays.asList(
                     new EndpointPermission(endpoint1, roleAdmin),
                     new EndpointPermission(endpoint2, roleAdmin),
                     new EndpointPermission(endpoint3, roleAdmin),
                     new EndpointPermission(endpoint4, roleAdmin),
                     new EndpointPermission(endpoint5, roleAdmin),
-                    new EndpointPermission(endpoint6, roleAdmin)
+                    new EndpointPermission(endpoint6, roleAdmin),
+                    new EndpointPermission(endpoint7, roleAdmin)
             );
             endpointPermissionRepository.saveAll(permissions);
         }

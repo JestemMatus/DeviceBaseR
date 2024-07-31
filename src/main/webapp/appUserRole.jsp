@@ -11,6 +11,7 @@
     <title>Zarządzaj rolami użytkowników</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/goBack.css' />" rel="stylesheet">
 
     <style>
         * {
@@ -103,18 +104,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 90%;
+            width: 80%;
             margin: 0 auto;
             margin-top: 60px;
+            padding: 20px;
             background-color: rgba(255,255,255, 0.2);
             border-radius: 20px;
         }
 
         .box {
-            background-color: white;
+            background-color: whitesmoke;
             color: #67105C;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px 40px;
+            border-radius: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
             margin-top: 0;
@@ -278,28 +280,29 @@
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
-            width: 100%;
+            width: 90%;
         }
 
         .role-box {
-            width: 100%; /* Szerokość, aby uwzględnić odstępy między boxami */
+            width: 90%; /* Szerokość, aby uwzględnić odstępy między boxami */
             max-width: calc(1620px); /* Maksymalna szerokość dla szerokości dwóch formularzy razem */
             flex: 1 1 100%;
             margin: 0 auto; /* Wyśrodkowanie */
             margin-bottom: 30px;
+            background-color: whitesmoke;
         }
 
         .box-fline {
-            background-color: white;
+            background-color: whitesmoke;
             color: #67105C;
-            padding: 20px;
+            padding: 35px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
-            margin-top: 30px;
+            margin-top: 60px;
             padding-top: 0;
             max-width: calc(1620px);
-            width: 100%;
+            width: 90%;
             flex: 1;
             position: relative; /* Add this line */
         }
@@ -309,22 +312,10 @@
             text-align: center; /* Center the text */
         }
 
-        .back-div {
-            position: absolute;
-            top: 50%; /* Center vertically */
-            left: 20px; /* Adjust the right position as needed */
-            transform: translateY(-50%); /* Center vertically */
-            background-color: whitesmoke;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            max-width: 180px;
-            width: 100%;
-        }
 
         .error-box {
             width: 97%;
-            background-color: white;
+            background-color: whitesmoke;
             color: red;
             border-radius: 15px;
             text-align: center;
@@ -332,10 +323,12 @@
             margin-bottom: 20px;
         }
 
+        .box role-box{}
+
 
 
     </style>
-
+    <script src="<c:url value='/resources/js/goBack.js' />"></script>
     <script>
         function ScrollToTop(){
             console.log("ScrollToTop function called");
@@ -367,9 +360,6 @@
 <div class="content">
     <div class="box-fline">
         <h1>Zarządzaj rolami użytkowników</h1>
-        <div class="back-div">
-            <button onclick="back()">Cofnij</button>
-        </div>
     </div>
 
     <div class="form-container">
@@ -430,6 +420,9 @@
         <button onclick="ScrollToTop()">
             <img src="resources/up.png" alt="Top" class="top-image">
         </button>
+    </div>
+    <div class="back-div">
+        <button onclick="goBack()">Cofnij</button>
     </div>
 </div>
 

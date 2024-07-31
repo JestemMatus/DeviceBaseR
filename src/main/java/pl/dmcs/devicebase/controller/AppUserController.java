@@ -3,6 +3,9 @@ package pl.dmcs.devicebase.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,12 +28,16 @@ public class AppUserController {
     private final AppUserValidator appUserValidator;
     private final AppUserService appUserService;
     private final AppUserRoleService appUserRoleService;
+    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
-    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator, AppUserRoleService appUserRoleService) {
+    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator, AppUserRoleService appUserRoleService, PasswordEncoder passwordEncoder) {
         this.appUserService = appUserService;
         this.appUserValidator = appUserValidator;
         this.appUserRoleService = appUserRoleService;
+        this.passwordEncoder = passwordEncoder;
+
     }
 
     @RequestMapping(value = "/register")
@@ -92,6 +99,10 @@ public class AppUserController {
                         case "telephoneNumber": matches &= user.getTelephoneNumber() != null && user.getTelephoneNumber().toLowerCase().contains(value); break;
                         case "department": matches &= user.getDepartment() != null && user.getDepartment().toLowerCase().contains(value); break;
                         case "workplace": matches &= user.getWorkplace() != null && user.getWorkplace().toLowerCase().contains(value); break;
+                        case "isEnabled":
+                            boolean isEnabled = Boolean.parseBoolean(value);
+                            matches &= user.isEnabled() == isEnabled;
+                            break;
                     }
                 }
                 return matches;
@@ -155,5 +166,38 @@ public class AppUserController {
         appUser.setAppUserRole(roles);
         appUserService.editAppUser(appUser);
         return "redirect:/usersRoles";
+    }
+
+    @GetMapping("/profile")
+    public String userProfile(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        AppUser currentUser = appUserService.findByLogin(currentUserName);
+        Set<AppUserRole> userRoles = currentUser.getAppUserRole();
+        model.addAttribute("user", currentUser);
+        model.addAttribute("userRoles", userRoles);
+        return "profile";
+    }
+    @GetMapping("/changePassword")
+    public String showChangePasswordPage() {
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam("oldPassword") String oldPassword,
+                                 @RequestParam("newPassword") String newPassword,
+                                 Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        AppUser currentUser = appUserService.findByLogin(currentUserName);
+
+        if (!passwordEncoder.matches(oldPassword, currentUser.getPassword())) {
+            model.addAttribute("error", "Stare hasło jest nieprawidłowe.");
+            return "changePassword";
+        }
+
+        currentUser.setPassword(passwordEncoder.encode(newPassword));
+        appUserService.editAppUser(currentUser);
+        return "redirect:/profile";
     }
 }

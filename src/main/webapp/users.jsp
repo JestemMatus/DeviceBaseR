@@ -10,7 +10,7 @@
 <head>
     <title>Użytkownicy</title>
     <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
-    <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/goBack.css' />" rel="stylesheet">
 
     <style>
         * {
@@ -101,7 +101,7 @@
         }
 
         .box {
-            background-color: white;
+            background-color: whitesmoke;
             padding: 30px 40px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             text-align: center;
@@ -122,7 +122,18 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
+
+        .filter-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            align-items: center;
+        }
+
 
         .filter-box table {
             width: 100%;
@@ -147,9 +158,12 @@
             box-sizing: border-box;
         }
 
+        .filter-box input[type="text"]:focus, select:focus {
+            outline: 2px solid mediumpurple;
+        }
+
         .filter-box button {
-            margin-top: 30px;
-            margin-bottom: 0;
+            margin: 0;
             background: linear-gradient(135deg, #67105C, #220039);
             color: white;
             cursor: pointer;
@@ -159,6 +173,7 @@
             font-size: 16px;
             display: block;
             width: 100%;
+            max-width: 100px;
             padding: 10px;
         }
 
@@ -173,8 +188,10 @@
             cursor: pointer;
             transition: transform 0.3s ease;
             vertical-align: middle;
-            margin-top: 30px;
-            margin-bottom: 0;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            display: block;
         }
 
         .filter-box .reload-image:hover {
@@ -254,8 +271,6 @@
             color: #9561d2;
         }
 
-
-
         .footer {
             margin-top: 40px;
             color: white;
@@ -289,7 +304,26 @@
             margin: 5px;
             border: 0;
             background-color: #f9f9f9;
+        }
 
+        .box .filter-td-title {
+            margin: 5px;
+            border: 0;
+            background-color: #f9f9f9;
+            text-align: left;
+            max-width:50px;
+
+        }
+
+        .box .filter-td-submit {
+            background-color: #f9f9f9;
+            padding: 5px;
+
+        }
+
+        .box .filter-table-submit{
+            max-width: 200px;
+            width: 100%;
         }
 
         .box-fline {
@@ -315,19 +349,6 @@
             margin: 0; /* Remove margin */
         }
 
-        .back-div {
-            position: absolute;
-            top: 50%; /* Center vertically */
-            left: 20px; /* Adjust the right position as needed */
-            transform: translateY(-50%); /* Center vertically */
-            background-color: whitesmoke;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            max-width: 180px;
-            width: 100%;
-        }
-
         .icon-true {
             color: green;
         }
@@ -341,9 +362,43 @@
             text-decoration: none;
         }
 
+        .placeholder-option {
+            color: #757575; /* Kolor podobny do placeholdera */
+        }
+
+        .department-select {
+            color: #757575 /* Kolor podobny do placeholdera */
+        }
+
+        .department-select:not(:invalid) {
+            color: #000; /* Normalny kolor tekstu */
+        }
+
+
 
     </style>
     <script src="<c:url value='/resources/js/ScrollToTop.js' />"></script>
+    <script src="<c:url value='/resources/js/goBack.js' />"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var selectElement = document.getElementById('department');
+
+            function updateSelectColor() {
+                if (selectElement.value === "") {
+                    selectElement.style.color = "#757575";
+                } else {
+                    selectElement.style.color = "#000";
+                }
+            }
+
+            selectElement.addEventListener('change', updateSelectColor);
+
+            // Initial color set
+            updateSelectColor();
+        });
+    </script>
+
     <script>
         let sortDirection = {}; // To keep track of sorting direction for each column
 
@@ -353,8 +408,17 @@
 
         function resetFilters() {
             document.querySelectorAll('.filter-box input[type="text"]').forEach(input => input.value = '');
-            document.querySelector('form').submit();
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', document.getElementById('filterForm').action, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.body.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send(new FormData(document.getElementById('filterForm')));
         }
+
 
         function formSubmit() {
             document.getElementById("logoutForm").submit();
@@ -422,45 +486,52 @@
     <div class="box">
         <div class="box-fline">
             <h1>Użytkownicy</h1>
-            <div class="back-div">
-                <button onclick="back()">Cofnij</button>
-            </div>
         </div>
         <div class="filter-box">
             <form method="get" action="${pageContext.request.contextPath}/users" id="filterForm">
                 <table id="filter-table">
                     <tr class="filter-tr">
-                        <td class="filter-td"><label for="login">Login:</label></td>
-                        <td class="filter-td"><input type="text" name="login" id="login" placeholder="Login" value="${param.login}"/></td>
-                        <td class="filter-td"><label for="firstName">Imię:</label></td>
-                        <td class="filter-td"><input type="text" name="firstName" id="firstName" placeholder="Imię" value="${param.firstName}"/></td>
-                        <td class="filter-td"><label for="lastName">Nazwisko:</label></td>
-                        <td class="filter-td"><input type="text" name="lastName" id="lastName" placeholder="Nazwisko" value="${param.lastName}"/></td>
+                        <td class="filter-td-title" colspan="1"><label for="login">Login:</label></td>
+                        <td class="filter-td" colspan="2"><input type="text" name="login" id="login" placeholder="Login" value="${param.login}"/></td>
+                        <td class="filter-td-title" colspan="1"><label for="firstName">Imię:</label></td>
+                        <td class="filter-td" colspan="2"><input type="text" name="firstName" id="firstName" placeholder="Imię" value="${param.firstName}"/></td>
+                        <td class="filter-td-title" colspan="1"><label for="lastName">Nazwisko:</label></td>
+                        <td class="filter-td" colspan="2"><input type="text" name="lastName" id="lastName" placeholder="Nazwisko" value="${param.lastName}"/></td>
                     </tr>
                     <tr class="filter-tr">
-                        <td class="filter-td"><label for="email">Email:</label></td>
-                        <td class="filter-td"><input type="text" name="email" id="email" placeholder="Email" value="${param.email}"/></td>
-                        <td class="filter-td"><label for="telephoneNumber">Numer telefonu:</label></td>
-                        <td class="filter-td"><input type="text" name="telephoneNumber" id="telephoneNumber" placeholder="Numer telefonu" value="${param.telephoneNumber}"/></td>
-                        <td class="filter-td"><label for="department">Dział:</label></td>
-                        <td class="filter-td"><input type="text" name="department" id="department" placeholder="Dział" value="${param.department}"/></td>
-                    </tr>
-                    <tr class="filter-tr">
-                        <td class="filter-td"><label for="workplace">Stanowisko pracy:</label></td>
-                        <td class="filter-td"><input type="text" name="workplace" id="workplace" placeholder="Stanowisko pracy" value="${param.workplace}"/></td>
-                    </tr>
-                    <tr class="filter-tr">
-                        <td colspan="2" class="filter-td"></td>
+                        <td class="filter-td-title" colspan="1"><label for="email">Email:</label></td>
+                        <td class="filter-td" colspan="2"><input type="text" name="email" id="email" placeholder="Email" value="${param.email}"/></td>
+                        <td class="filter-td-title" colspan="1"><label for="telephoneNumber">Numer telefonu:</label></td>
+                        <td class="filter-td" colspan="2"><input type="text" name="telephoneNumber" id="telephoneNumber" placeholder="Numer telefonu" value="${param.telephoneNumber}"/></td>
+                        <td class="filter-td-title" colspan="1"><label for="department">Dział:</label></td>
                         <td class="filter-td" colspan="2">
-                            <button type="submit">Filtruj</button>
+                            <select name="department" id="department" class="department-select">
+                                <option value="" class="placeholder-option">-- Wybierz dział --</option>
+                                <option value="Dział 1">Dział 1</option>
+                                <option value="Dział 2">Dział 2</option>
+                                <option value="Dział 3">Dział 3</option>
+                                <option value="Dział 4">Dział 4</option>
+                            </select>
                         </td>
-                        <td class="filter-td">
-                            <img src="resources/reload1.png" class="reload-image" onclick="resetFilters()">
+                    </tr>
+                    <tr class="filter-tr">
+                        <td class="filter-td-title" colspan="1"><label for="workplace">Stanowisko pracy:</label></td>
+                        <td class="filter-td" colspan="2"><input type="text" name="workplace" id="workplace" placeholder="Stanowisko pracy" value="${param.workplace}"/></td>
+                        <td class="filter-td-title" colspan="1"><label for="isEnabled">Aktywny:</label></td>
+                        <td class="filter-td-title" colspan="2">
+                            <input type="checkbox" name="isEnabled" id="isEnabled" value="true" ${param.isEnabled ? 'checked' : ''} /> Tak
+                            <input type="checkbox" name="isEnabled" id="isEnabled" value="false" ${param.isEnabled != null && !param.isEnabled ? 'checked' : ''} /> Nie
                         </td>
+                        <td class="filter-td" colspan="3"></td>
                     </tr>
                 </table>
+                <div class="filter-controls">
+                    <button type="submit" class="filter-button">Filtruj</button>
+                    <img src="resources/reload1.png" class="reload-image" onclick="resetFilters()">
+                </div>
             </form>
         </div>
+
         <table id="userTable">
             <thead>
             <tr>
@@ -498,13 +569,13 @@
                     <td class="actions">
                         <div class="action-group">
                             <a href="javascript:confirmAction('<c:url value='/delete/${user.id}' />', 'Czy na pewno chcesz usunąć tego użytkownika?')">Usuń</a> |
-                            <a href="<c:url value='/edit/${user.id}' />">Edytuj</a> |
+                            <a href="<c:url value='/ComingSoon' />">Edytuj</a> |
                             <a href="javascript:confirmAction('<c:url value='/approve/${user.id}' />', 'Czy na pewno chcesz aktywować tego użytkownika?')">Aktywuj</a>
                         </div>
                         <div class="action-group">
                             <a href="javascript:confirmAction('<c:url value='/deactivate/${user.id}' />', 'Czy na pewno chcesz dezaktywować tego użytkownika?')">Dezaktywuj</a> |
                             <a href="<c:url value='/usersRoles' />">Role</a> |
-                            <a href="<c:url value='/assignRole/${user.id}' />">Więcej</a>
+                            <a href="<c:url value='/ComingSoon' />">Więcej</a>
                         </div>
                     </td>
                 </tr>
@@ -516,6 +587,9 @@
         <button onclick="ScrollToTop()">
             <img src="resources/up.png" alt="Top" class="top-image">
         </button>
+    </div>
+    <div class="back-div">
+        <button onclick="goBack()" id="back-button">Cofnij</button>
     </div>
 </div>
 <div class="footer">

@@ -11,6 +11,7 @@
     <title>Przydziel role</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="<c:url value='/resources/css/scrollToTop.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/goBack.css' />" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -101,7 +102,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 90%;
+            width: 80%;
             margin: 0 auto;
             margin-top: 60px;
             background-color: rgba(255,255,255, 0.2);
@@ -109,7 +110,7 @@
         }
 
         .box {
-            background-color: white;
+            background-color: whitesmoke;
             color: #67105C;
             padding: 20px;
             border-radius: 10px;
@@ -118,7 +119,21 @@
             margin-top: 0;
             padding-top: 0;
             width: 100%;
-            max-width: 800px;
+            max-width: 930px;
+            flex: 1;
+        }
+
+        .box-1{
+            background-color: whitesmoke;
+            color: #67105C;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            margin-top: 0;
+            padding-top: 0;
+            width: 100%;
+            max-width: 400px;
             flex: 1;
         }
 
@@ -222,7 +237,7 @@
             outline: 2px solid #67105C;
         }
 
-        .box input[type="text"], .box input[type="password"] {
+        .box input[type="text"], .box input[type="password"], .box-1 input[type="text"], .box-1 input[type="password"] {
             width: 100%;
             padding: 12px;
             padding-left: 5px; /* Add padding to the left to make space for the icon */
@@ -235,7 +250,7 @@
             margin-top: 0;
         }
 
-        .box input[type="text"]:focus {
+        .box input[type="text"]:focus, .box-1 input[type="text"]:focus {
             outline: 2px solid #67105C;
         }
 
@@ -265,7 +280,7 @@
         }
 
         .role-box {
-            width: 100%; /* Szerokość, aby uwzględnić odstępy między boxami */
+            width: 90%; /* Szerokość, aby uwzględnić odstępy między boxami */
             max-width: calc(1620px); /* Maksymalna szerokość dla szerokości dwóch formularzy razem */
             flex: 1 1 100%;
             margin: 0 auto; /* Wyśrodkowanie */
@@ -273,17 +288,17 @@
         }
 
         .box-fline {
-            background-color: white;
+            background-color: whitesmoke;
             color: #67105C;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
-            margin-top: 0;
+            margin-top: 60px;
             padding-top: 0;
             min-height: 120px;
             max-width: calc(1620px);
-            width: 100%;
+            width: 90%;
             flex: 1;
             position: relative; /* Add this line */
             height: 100%;
@@ -300,18 +315,6 @@
             margin: 0 auto;
         }
 
-        .back-div {
-            position: absolute;
-            top: 50%; /* Center vertically */
-            left: 20px; /* Adjust the right position as needed */
-            transform: translateY(-50%); /* Center vertically */
-            background-color: whitesmoke;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            max-width: 180px;
-            width: 100%;
-        }
 
         .form-container {
             display: flex;
@@ -502,6 +505,8 @@
 
 
     </style>
+    <script src="<c:url value='/resources/js/goBack.js' />"></script>
+    <script src="<c:url value='/resources/js/ScrollToTop.js' />"></script>
     <script>
         function back(){
             window.location.href = "/home"
@@ -569,6 +574,7 @@
 
 
     </script>
+
 </head>
 <body>
 <div class="header">
@@ -589,9 +595,6 @@
 <div class="content">
     <div class="box-fline">
         <h1>Przydziel uprawnienia</h1>
-        <div class="back-div">
-            <button onclick="back()">Cofnij</button>
-        </div>
     </div>
 
     <div class="form-container">
@@ -637,7 +640,7 @@
         </div>
 
         <!-- Sekcja 2: Formularz do edycji roli użytkownika -->
-        <div class="box">
+        <div class="box-1">
             <h2>Edytuj uprawnienia użytkownika</h2>
             <form action="<c:url value='/updateUserRoles' />" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -675,7 +678,14 @@
 
     </div>
 </div>
-
+<div class="top-class">
+    <button type="button" onclick="ScrollToTop()">
+        <img src="resources/up.png" alt="Top" class="top-image">
+    </button>
+</div>
+<div class="back-div">
+    <button type="button" onclick="goBack()">Cofnij</button>
+</div>
 <div class="footer">
     <p>&copy; <%= new SimpleDateFormat("EEEE, d MMMM yyyy", new Locale("pl", "PL")).format(new Date()) %> - Wszystkie prawa zastrzeżone</p>
 </div>
