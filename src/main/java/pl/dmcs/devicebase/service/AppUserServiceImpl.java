@@ -88,4 +88,13 @@ public class AppUserServiceImpl implements AppUserService{
     }
 
 
-}
+    @Override
+    public AppUser findByEmail(String email) {
+        return appUserRepository.findByEmail(email);
+    }
+
+    @Override
+    public AppUser findByTelephoneNumber(String telephoneNumber) {
+        return appUserRepository.findByPhoneNumber(telephoneNumber);
+
+}}

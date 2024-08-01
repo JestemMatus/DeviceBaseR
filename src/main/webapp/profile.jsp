@@ -31,10 +31,9 @@
             color: #fff;
         }
 
-
         .header {
             width: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            background: rgba(0, 0, 0, 0.5);
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -44,8 +43,8 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
-            left: 50%; /* Center the header */
-            transform: translateX(-50%); /* Center the header */
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
@@ -53,17 +52,17 @@
 
         .header .links {
             display: flex;
-            gap: 10px; /* Reduce gap between links */
-            align-items: center; /* Center items vertically */
+            gap: 10px;
+            align-items: center;
         }
 
         .header .links a {
             color: white;
             text-decoration: none;
-            padding: 5px 10px; /* Reduce padding */
+            padding: 5px 10px;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            background: rgba(255, 255, 255, 0.1); /* Lighter semi-transparent background */
+            background: rgba(255, 255, 255, 0.1);
             font-size: 14px;
         }
 
@@ -115,6 +114,22 @@
             text-align: center;
         }
 
+        .groupbox {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .groupbox legend {
+            padding: 0 10px;
+            font-size: 18px;
+            color: #67105C;
+            font-weight: bold;
+        }
+
         .profile-item {
             display: flex;
             justify-content: space-between;
@@ -132,17 +147,20 @@
             min-width: 150px;
             display: inline-block;
             font-size: 16px;
+            padding-left: 10px;
+
         }
 
         .profile-item span {
             font-size: 16px;
             flex: 1;
             text-align: left;
+            padding-left: 10px;
         }
 
         .profile-item .edit-icon {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
             margin-left: 10px;
             transition: transform 0.3s ease;
@@ -154,6 +172,7 @@
 
         .roles {
             margin-top: 20px;
+            color: #67105C;
         }
 
         .roles ul {
@@ -194,6 +213,43 @@
             width: 100%;
             font-size: 12px;
         }
+
+        .toogle-form {
+            text-align: left;
+            margin-top: 15px;
+            padding: 0;
+        }
+
+        .toogle-form input{
+            max-width: 250px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: 1px solid mediumpurple;
+            font-size: 16px;
+        }
+
+        .toogle-form select{
+            max-width: 250px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: 1px solid mediumpurple;
+            font-size: 16px;
+        }
+
+        .toogle-form select:focus{
+            border: none;
+            outline: 2px solid #67105C;
+        }
+
+        .toogle-form .submit-button {
+            width: 100%;
+            max-width: 250px;
+        }
+
     </style>
 </head>
 <body>
@@ -215,56 +271,112 @@
 <div class="content">
     <div class="box">
         <h1>Profil Użytkownika</h1>
-        <div class="profile-item">
-            <strong>Imię:</strong>
-            <span><c:out value="${user.firstName}"/></span>
-        </div>
-        <div class="profile-item">
-            <strong>Nazwisko:</strong>
-            <span><c:out value="${user.lastName}"/> </span>
-        </div>
-        <div class="profile-item">
-            <strong>Email:</strong>
-            <span><c:out value="${user.email}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
-        </div>
-        <div class="profile-item">
-            <strong>Login:</strong>
-            <span><c:out value="${user.login}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
-        </div>
-        <div class="profile-item">
-            <strong>Dział:</strong>
-            <span><c:out value="${user.department}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
-        </div>
-        <div class="profile-item">
-            <strong>Miejsce pracy:</strong>
-            <span><c:out value="${user.workplace}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
-        </div>
-        <div class="profile-item">
-            <strong>Numer telefonu:</strong>
-            <span><c:out value="${user.telephoneNumber}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
-        </div>
-        <div class="profile-item">
-            <strong>Aktywny:</strong>
-            <span>
-                <c:choose>
-                    <c:when test="${user.enabled}">
-                        <span class="icon-true">✔️</span>
-                    </c:when>
-                    <c:otherwise>
-                        <span class="icon-false">❌</span>
-                    </c:otherwise>
-                </c:choose>
-            </span>
-        </div>
-        <div class="roles">
-            <strong>Uprawnienia:</strong>
-            <ul>
-                <c:forEach var="role" items="${userRoles}">
-                    <li><c:out value="${role.role}"/></li>
-                </c:forEach>
-            </ul>
-        </div>
+
+        <fieldset class="groupbox">
+            <legend>Dane konta</legend>
+            <div class="profile-item">
+                <strong>Imię:</strong>
+                <span><c:out value="${user.firstName}"/></span>
+            </div>
+            <div class="profile-item">
+                <strong>Nazwisko:</strong>
+                <span><c:out value="${user.lastName}"/> </span>
+            </div>
+            <div class="profile-item">
+                <strong>Email:</strong>
+                <span>
+                    <c:out value="${user.email}"/>
+                    <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" onclick="toggleEdit('email')" />
+                    <form:form modelAttribute="emailForm" method="post" action="/editEmail" class="toogle-form" style="display: none;" id="email-form">
+                        <form:input path="email" type="email" value="${user.email}" />
+                        <button type="submit" class="submit-button" >Zapisz</button>
+                    </form:form>
+                </span>
+            </div>
+            <div class="profile-item">
+                <strong>Login:</strong>
+                <span>
+                    <c:out value="${user.login}"/>
+                    <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" onclick="toggleEdit('login')" />
+                    <form:form modelAttribute="loginForm" method="post" action="/editLogin" class="toogle-form" style="display: none;" id="login-form">
+                        <form:input path="login" type="text" value="${user.login}" />
+                        <button type="submit" class="submit-button">Zapisz</button>
+                    </form:form>
+                </span>
+            </div>
+            <div class="profile-item">
+                <strong>Numer telefonu:</strong>
+                <span>
+                    <c:out value="${user.telephoneNumber}"/>
+                    <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" onclick="toggleEdit('phoneNumber')" />
+                    <form:form modelAttribute="phoneForm" method="post" action="/editPhoneNumber" class="toogle-form" style="display: none;" id="phoneNumber-form">
+                        <form:input path="phonePrefix" type="text" class="toogle-form" value="${user.phonePrefix}" placeholder="Prefix" />
+                        <form:input path="phoneNumber" type="text" class="toogle-form" value="${user.phoneNumber}" placeholder="Numer" />
+                        <button type="submit" class="submit-button">Zapisz</button>
+                    </form:form>
+                </span>
+            </div>
+        </fieldset>
+
+        <!-- Dane Pracownicze -->
+        <fieldset class="groupbox">
+            <legend>Dane pracownika</legend>
+            <div class="profile-item">
+                <strong>Dział:</strong>
+                <span>
+                    <c:out value="${user.department}"/>
+                    <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" onclick="toggleEdit('department')" />
+                    <form:form method="post" action="/editDepartment" class="toogle-form" style="display: none;" id="department-form">
+                        <select name="department">
+                            <option value="IT">IT</option>
+                            <option value="HR">HR</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Sales">Sales</option>
+                        </select>
+                        <button type="submit" class="submit-button">Zapisz</button>
+                    </form:form>
+                </span>
+            </div>
+            <div class="profile-item">
+                <strong>Stanowisko pracy:</strong>
+                <span>
+                    <c:out value="${user.workplace}"/>
+                    <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" onclick="toggleEdit('workplace')" />
+                    <form:form modelAttribute="workplaceForm" method="post" action="/editWorkplace" class="toogle-form" style="display: none;" id="workplace-form">
+                        <form:input path="workplace" type="text" value="${user.workplace}" />
+                        <button type="submit" class="submit-button">Zapisz</button>
+                    </form:form>
+                </span>
+            </div>
+        </fieldset>
+
+        <!-- Role -->
+        <fieldset class="groupbox">
+            <legend>Uprawnienia</legend>
+            <div class="profile-item">
+                <strong>Uwierzytelnione:</strong>
+                <span>
+                    <c:choose>
+                        <c:when test="${user.enabled}">
+                            <span class="icon-true">✔️</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="icon-false">❌</span>
+                        </c:otherwise>
+                    </c:choose>
+                </span>
+            </div>
+            <div class="roles">
+                <strong>Uprawnienia:</strong>
+                <ul>
+                    <c:forEach var="role" items="${userRoles}">
+                        <li><strong>- <c:out value="${role.role}"/></strong></li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </fieldset>
         <a href="/changePassword" class="change-password-link">Zmień hasło</a>
+
     </div>
 </div>
 
@@ -275,5 +387,12 @@
     function formSubmit() {
         document.getElementById('logoutForm').submit();
     }
+
+    function toggleEdit(field) {
+        var form = document.getElementById(field + '-form');
+        var display = form.style.display;
+        form.style.display = display === 'none' ? 'block' : 'none';
+    }
 </script>
 </body>
+</html>

@@ -191,6 +191,8 @@
     <div class="box">
         <h2>Moje konto</h2>
         <button class="btn" onclick="window.location.href='/profile'">Zarządzaj kontem</button>
+        <button class="btn" onclick="window.location.href='/changePassword'">Zmień hasło</button>
+
     </div>
     <div class="box">
         <h2>Test</h2>

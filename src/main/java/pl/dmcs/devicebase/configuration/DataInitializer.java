@@ -127,6 +127,20 @@ public class DataInitializer {
             endpoint7.setLabel("Profil użytkownika");
             endpointRepository.save(endpoint7);
 
+            Endpoint endpoint8 = new Endpoint();
+            endpoint8.setId(8L);
+            endpoint8.setDescription("Zezwala na edytowanie użytkowników");
+            endpoint8.setEndpoint("/editUser**");
+            endpoint8.setLabel("Edycja użytkowników");
+            endpointRepository.save(endpoint8);
+
+            Endpoint endpoint9 = new Endpoint();
+            endpoint9.setId(9L);
+            endpoint9.setDescription("Zezwala na zmianę haseł użytkowników");
+            endpoint9.setEndpoint("/changeUserPassword/**");
+            endpoint9.setLabel("Zmiana haseł użytkowników");
+            endpointRepository.save(endpoint9);
+
             List<EndpointPermission> permissions = Arrays.asList(
                     new EndpointPermission(endpoint1, roleAdmin),
                     new EndpointPermission(endpoint2, roleAdmin),
@@ -134,7 +148,12 @@ public class DataInitializer {
                     new EndpointPermission(endpoint4, roleAdmin),
                     new EndpointPermission(endpoint5, roleAdmin),
                     new EndpointPermission(endpoint6, roleAdmin),
-                    new EndpointPermission(endpoint7, roleAdmin)
+                    new EndpointPermission(endpoint7, roleAdmin),
+                    new EndpointPermission(endpoint8, roleAdmin),
+                    new EndpointPermission(endpoint9, roleAdmin),
+                    new EndpointPermission(endpoint7, roleUser),
+                    new EndpointPermission(endpoint2, roleUser)
+
             );
             endpointPermissionRepository.saveAll(permissions);
         }

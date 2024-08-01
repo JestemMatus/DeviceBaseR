@@ -17,4 +17,7 @@ public interface AppUserService {
 
     AppUser findByLogin(String login);
 
+    AppUser findByEmail(String email);
+    AppUser findByTelephoneNumber(String telephoneNumber);
+
 }

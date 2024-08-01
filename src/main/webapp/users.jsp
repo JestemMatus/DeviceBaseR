@@ -570,7 +570,7 @@
                     <td class="actions">
                         <div class="action-group">
                             <a href="javascript:confirmAction('<c:url value='/delete/${user.id}' />', 'Czy na pewno chcesz usunąć tego użytkownika?')">Usuń</a> |
-                            <a href="<c:url value='/ComingSoon' />">Edytuj</a> |
+                            <a href="<c:url value='/editUser/${user.id}' />">Edytuj</a> |
                             <a href="javascript:confirmAction('<c:url value='/approve/${user.id}' />', 'Czy na pewno chcesz aktywować tego użytkownika?')">Aktywuj</a>
                         </div>
                         <div class="action-group">

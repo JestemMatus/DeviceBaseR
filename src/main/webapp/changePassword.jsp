@@ -154,18 +154,22 @@
     }
 
     .box form button {
-      padding: 10px;
+      display: block;
+      width: 100%;
+      padding: 12px;
       font-size: 16px;
-      background-color: #67105C;
-      color: #fff;
+      color: white;
+      background: linear-gradient(135deg, #67105C, #220039);
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease;
+      margin: 5px;
     }
 
     .box form button:hover {
-      background-color: #5b0e4c;
+      background: linear-gradient(135deg, #5b79e4, #9561d2);
+      transform: scale(1.05);
     }
 
     .error-message {
@@ -199,7 +203,9 @@
       left: 0;
     }
 
+
   </style>
+  <script src="<c:url value='/resources/js/goBack.js' />"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const passwordInput = document.getElementById('newPassword');
@@ -294,6 +300,7 @@
           <div id="passwordTooltip" class="tooltip"></div>
         </div>
         <button type="submit">Zmień hasło</button>
+        <button onclick="goBack()" id="back-button">Cofnij</button>
       </form>
 
 
@@ -306,6 +313,8 @@
 <script>
   function formSubmit() {
     document.getElementById('logoutForm').submit();
+
+
   }
 </script>
 </body>
