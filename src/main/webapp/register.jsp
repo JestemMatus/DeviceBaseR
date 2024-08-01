@@ -651,10 +651,7 @@
                         <div class="input-wrapper">
                             <form:select path="department" class="box select">
                                 <form:option value="" label="Wybierz dział" />
-                                <form:option value="Dział 1" label="Dział 1" />
-                                <form:option value="Dział 2" label="Dział 2" />
-                                <form:option value="Dział 3" label="Dział 3" />
-                                <form:option value="Dział 4" label="Dział 4" />
+                                <form:options items="${departments}" itemValue="departmentName" itemLabel="departmentName"/>
                             </form:select>
                             <span class="validation-icon-password"></span>
                         </div>
@@ -663,6 +660,7 @@
                 <tr>
                     <td class="validation-td"><form:errors path="department"/></td>
                 </tr>
+
                 <tr>
                     <td colspan="10">
                         <form:label path="workplace">Stanowisko pracy:</form:label>

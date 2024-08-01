@@ -280,19 +280,23 @@
     <form action="<c:url value='/changePassword' />" method="post">
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <c:if test="${not empty error}">
-        <div class="error-message">${error}</div>
+      <div class="error-message">${error}</div>
       </c:if>
-      <div class="input-wrapper">
-        <input type="password" name="oldPassword" id="oldPassword" placeholder="Stare hasło" required />
-        <img src="/resources/view_icon.png" alt="Show password" id="toggle-oldPassword" class="toggle-password" onclick="togglePasswordVisibility('oldPassword', 'toggle-oldPassword')" />
-      </div>
-      <div class="input-wrapper">
-        <input type="password" name="newPassword" id="newPassword" placeholder="Nowe hasło" required />
-        <img src="/resources/view_icon.png" alt="Show password" id="toggle-newPassword" class="toggle-password" onclick="togglePasswordVisibility('newPassword', 'toggle-newPassword')" />
-        <div id="passwordTooltip" class="tooltip"></div>
-      </div>
-      <button type="submit">Zmień hasło</button>
-    </form>
+      <form action="<c:url value='/changePassword' />" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div class="input-wrapper">
+          <input type="password" name="oldPassword" id="oldPassword" placeholder="Stare hasło" required />
+          <img src="/resources/view_icon.png" alt="Show password" id="toggle-oldPassword" class="toggle-password" onclick="togglePasswordVisibility('oldPassword', 'toggle-oldPassword')" />
+        </div>
+        <div class="input-wrapper">
+          <input type="password" name="newPassword" id="newPassword" placeholder="Nowe hasło" required />
+          <img src="/resources/view_icon.png" alt="Show password" id="toggle-newPassword" class="toggle-password" onclick="togglePasswordVisibility('newPassword', 'toggle-newPassword')" />
+          <div id="passwordTooltip" class="tooltip"></div>
+        </div>
+        <button type="submit">Zmień hasło</button>
+      </form>
+
+
   </div>
 </div>
 

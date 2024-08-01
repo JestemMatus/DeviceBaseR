@@ -217,11 +217,11 @@
         <h1>Profil Użytkownika</h1>
         <div class="profile-item">
             <strong>Imię:</strong>
-            <span><c:out value="${user.firstName}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
+            <span><c:out value="${user.firstName}"/></span>
         </div>
         <div class="profile-item">
             <strong>Nazwisko:</strong>
-            <span><c:out value="${user.lastName}"/> <img src="<c:url value='/resources/edit-icon.png' />" alt="Edytuj" class="edit-icon" /></span>
+            <span><c:out value="${user.lastName}"/> </span>
         </div>
         <div class="profile-item">
             <strong>Email:</strong>

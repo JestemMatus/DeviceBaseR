@@ -8,13 +8,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.*;
 import pl.dmcs.devicebase.domain.AppUser;
 import pl.dmcs.devicebase.domain.AppUserRole;
+import pl.dmcs.devicebase.domain.Department;
 import pl.dmcs.devicebase.service.AppUserRoleService;
 import pl.dmcs.devicebase.service.AppUserService;
+import pl.dmcs.devicebase.service.DepartmentService;
 import pl.dmcs.devicebase.validator.AppUserValidator;
 
 import java.util.List;
@@ -29,15 +33,16 @@ public class AppUserController {
     private final AppUserService appUserService;
     private final AppUserRoleService appUserRoleService;
     private final PasswordEncoder passwordEncoder;
+    private final DepartmentService departmentService;
 
 
     @Autowired
-    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator, AppUserRoleService appUserRoleService, PasswordEncoder passwordEncoder) {
+    public AppUserController(AppUserService appUserService, AppUserValidator appUserValidator, AppUserRoleService appUserRoleService, PasswordEncoder passwordEncoder, DepartmentService departmentService) {
         this.appUserService = appUserService;
         this.appUserValidator = appUserValidator;
         this.appUserRoleService = appUserRoleService;
         this.passwordEncoder = passwordEncoder;
-
+        this.departmentService = departmentService;
     }
 
     @RequestMapping(value = "/register")
@@ -80,9 +85,10 @@ public class AppUserController {
         return "welcome";
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @GetMapping("/users")
     public String showAllUsers(Model model, @RequestParam Map<String, String> allParams) {
         List<AppUser> users = appUserService.listAppUser();
+        List<Department> departments = departmentService.findAll(); // Pobranie listy działów
 
         // Filtrowanie
         if (!allParams.isEmpty()) {
@@ -110,8 +116,10 @@ public class AppUserController {
         }
 
         model.addAttribute("users", users);
+        model.addAttribute("departments", departments); // Dodanie działów do modelu
         return "users";
     }
+
 
     @RequestMapping(value = "/edit/{appUserId}", method = RequestMethod.GET)
     public String editUser(@PathVariable("appUserId") Long appUserId) {
@@ -196,8 +204,23 @@ public class AppUserController {
             return "changePassword";
         }
 
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#\\$%\\^&\\*])(?=.*\\d).{8,}$";
+        if (!newPassword.matches(passwordPattern)) {
+            model.addAttribute("error", "Hasło musi mieć co najmniej 8 znaków, zawierać jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny.");
+            return "changePassword";
+        }
+
         currentUser.setPassword(passwordEncoder.encode(newPassword));
         appUserService.editAppUser(currentUser);
         return "redirect:/profile";
     }
+
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        List<Department> departments = departmentService.findAll();
+        model.addAttribute("departments", departments);
+        model.addAttribute("register", new AppUser());
+        return "register";
+    }
+
 }

@@ -29,6 +29,9 @@ public class DataInitializer {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @PostConstruct
     @Transactional
     public void init() {
@@ -40,10 +43,14 @@ public class DataInitializer {
             roleAdmin.setRole("ROLE_ADMIN");
             appUserRoleRepository.save(roleAdmin);
 
+            AppUserRole roleUser = new AppUserRole();
+            roleUser.setRole("ROLE_USER");
+            appUserRoleRepository.save(roleUser);
+
             // Tworzenie użytkownika admin
             AppUser adminUser = new AppUser();
-            adminUser.setDepartment("Dział 2");
-            adminUser.setEmail("adammatuszewski00@gmail.com");
+            adminUser.setDepartment("Admin");
+            adminUser.setEmail("admin00@gmail.com");
             adminUser.setIsEnabled(true);
             adminUser.setFirstName("Adam");
             adminUser.setLastName("Matuszewski");
@@ -51,9 +58,24 @@ public class DataInitializer {
             adminUser.setPassword(passwordEncoder.encode("Admin123%"));
             adminUser.setPhonePrefix("+48");
             adminUser.setPhoneNumber("733 088 560");
-            adminUser.setWorkplace("asdasd");
+            adminUser.setWorkplace("admin");
             adminUser.getAppUserRole().add(roleAdmin);
             appUserRepository.save(adminUser);
+
+            // Tworzenie użytkownika user
+            AppUser userUser = new AppUser();
+            userUser.setDepartment("User");
+            userUser.setEmail("user00@gmail.com");
+            userUser.setIsEnabled(true);
+            userUser.setFirstName("Adam");
+            userUser.setLastName("Matuszewski");
+            userUser.setLogin("user");
+            userUser.setPassword(passwordEncoder.encode("Admin123%"));
+            userUser.setPhonePrefix("+48");
+            userUser.setPhoneNumber("733 088 560");
+            userUser.setWorkplace("user");
+            userUser.getAppUserRole().add(roleUser);
+            appUserRepository.save(userUser);
 
             // Tworzenie endpointów
             Endpoint endpoint1 = new Endpoint();
@@ -115,6 +137,19 @@ public class DataInitializer {
                     new EndpointPermission(endpoint7, roleAdmin)
             );
             endpointPermissionRepository.saveAll(permissions);
+        }
+
+        createDepartmentIfNotExists("Dział oczyszczania ścieków", "Opis działu");
+        createDepartmentIfNotExists("Dział księgowości", "Opis działu");
+        createDepartmentIfNotExists("Dział mechaniczny", "Opis działu");
+    }
+
+    private void createDepartmentIfNotExists(String departmentName, String description) {
+        if (!departmentRepository.existsByDepartmentName(departmentName)) {
+            Department department = new Department();
+            department.setDepartmentName(departmentName);
+            department.setDescription(description);
+            departmentRepository.save(department);
         }
     }
 }

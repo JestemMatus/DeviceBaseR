@@ -63,9 +63,9 @@ public class AppUserValidator implements Validator {
             errors.rejectValue("phoneNumber", "error.telephone.exists");
         }
 
-        // Walidacja hasła
         if (StringUtils.hasText(appUser.getPassword()) && !Pattern.matches(combinedPasswordPattern, appUser.getPassword())) {
             errors.rejectValue("password", "error.password.invalid");
         }
     }
+
 }

@@ -5,6 +5,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+
 
 <html>
 <head>
@@ -507,10 +509,9 @@
                         <td class="filter-td" colspan="2">
                             <select name="department" id="department" class="department-select">
                                 <option value="" class="placeholder-option">-- Wybierz dział --</option>
-                                <option value="Dział 1">Dział 1</option>
-                                <option value="Dział 2">Dział 2</option>
-                                <option value="Dział 3">Dział 3</option>
-                                <option value="Dział 4">Dział 4</option>
+                                <c:forEach var="department" items="${departments}">
+                                    <option value="${department.departmentName}">${department.departmentName}</option>
+                                </c:forEach>
                             </select>
                         </td>
                     </tr>
